@@ -11,7 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('register_details', function(Blueprint $table){
+            $table->id();
+
+            $table->unsignedInteger('quantity')
+                ->nullable(false);
+
+            $table->foreignId('register_id')
+                ->constrained('registers', 'id');
+            $table->foreignId('refaction_id')
+                ->constrained('refactions', 'id');
+
+            $table->timestamps();
+        });
     }
 
     /**

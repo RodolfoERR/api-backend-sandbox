@@ -11,22 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notifications', function(Blueprint $table){
+        Schema::create('shelves', function(Blueprint $table){
             $table->id();
-
-            $table->string('name', 25)
-                ->nullable(false);
-            $table->text('description')
-                ->nullable();
+            
+            $table->string('name', 10)
+                ->nullable(false)
+                ->unique();
             $table->boolean('active')
                 ->default(true);
-            
-            $table->foreignId('refaction_id')
-                ->nullable()
-                ->constrained('refactions', 'id');
-            $table->foreignId('re_id')
-                ->nullable()
-                ->constrained('register_details', 'id');
+            $table->foreignId('level_id')
+                ->constrained('levels')
+                ->references('id');
 
             $table->timestamps();
         });
