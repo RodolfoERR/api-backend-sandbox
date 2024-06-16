@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         $user->l_name = 'Inventory';
         $user->fingerprint = '';
         $user->phone = 0000000000;
-        $user->email = 'coriaedd@gmail.com';
+        $user->email = 'mikecervantes10@gmail.com';
         $user->password = Hash::make('admin.pass');
         $user->active = true;
         $user->role_id = 1;

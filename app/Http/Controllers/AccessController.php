@@ -64,6 +64,7 @@ class AccessController extends Controller
                 $code = random_int(100000, 999999);
                 $user->code = Hash::make($code);
                 $user->save();
+                
                 MailSender::dispatch($user, "", "")->delay(now()->addSeconds(1));
             }catch(Exception $e){
                 if($e){
