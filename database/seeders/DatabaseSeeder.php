@@ -24,12 +24,12 @@ class DatabaseSeeder extends Seeder
 
         /* Roles */
         $role = new Role();
-        $role->role = 'a';
+        $role->name = 'a';
         $role->description = 'Admin';
         $role->save();
 
         $role = new Role();
-        $role->role = 'u';
+        $role->name = 'u';
         $role->description = 'User';
         $role->save();
 
@@ -37,7 +37,10 @@ class DatabaseSeeder extends Seeder
         /* Admin */
         $user = new User();
 
-        $user->name = 'Admin';
+        $user->f_name = 'Admin';
+        $user->l_name = 'Inventory';
+        $user->fingerprint = '';
+        $user->phone = 0000000000;
         $user->email = 'coriaedd@gmail.com';
         $user->password = Hash::make('admin.pass');
         $user->active = true;

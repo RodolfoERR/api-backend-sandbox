@@ -31,7 +31,7 @@ return new class extends Migration
             
             
             $table->string('code', 6)
-                ->nullable(false);
+                ->nullable();
             $table->foreignId('role_id')
                 ->constrained('roles')
                 ->references('id');
