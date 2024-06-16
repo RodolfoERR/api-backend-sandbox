@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>2FA Verification</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for Icons -->
@@ -32,8 +32,28 @@
             border-radius: 1rem;
             background-color: #FFFFFF; /* Blanco */
         }
-        .card-img-left {
-            border-radius: 1rem 0 0 1rem;
+        .verification-card {
+            border-radius: 1rem;
+            padding: 2rem;
+            background: #e0e0e0;
+            text-align: center;
+        }
+        .verification-card .form-control {
+            display: inline-block;
+            width: 40px;
+            text-align: center;
+            margin: 0 5px;
+        }
+        .btn-custom {
+            background-color: #007EE5; /* Azul de Dropbox */
+            color: white;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #005bb5;
         }
         .form-outline {
             position: relative;
@@ -53,13 +73,6 @@
             font-size: 0.75rem;
             color: #495057;
         }
-        .btn-primary {
-            background-color: #007EE5; /* Azul de Dropbox */
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #005bb5;
-        }
         .text-primary {
             color: #007EE5 !important; /* Azul de Dropbox */
         }
@@ -74,32 +87,31 @@
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
                             <img src="https://img.freepik.com/foto-gratis/mecanico-automoviles-revisando-aceite-motor-automovil-mientras-trabaja-taller-reparacion-automoviles_637285-4299.jpg"
-                                 alt="login form" class="img-fluid card-img-left" />
+                                 alt="verification form" class="img-fluid card-img-left" />
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
+                                <div class="d-flex align-items-center mb-3 pb-1">
+                                    <i class="fas fa-cubes fa-2x me-3 text-primary"></i>
+                                    <span class="h1 fw-bold mb-0">Control de Almacén</span>
+                                </div>
+                                <h5 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Se ha enviado un código de verificación a tu Correo Electrónico</h5>
                                 <form>
-                                    <div class="d-flex align-items-center mb-3 pb-1">
-                                        <i class="fas fa-cubes fa-2x me-3 text-primary"> </i>
-                                        <span class="h1 fw-bold mb-0"> Control de Almacén</span>
+                                    <p class="mb-3 text-primary">*Código de 6 dígitos</p>
+                                    <div class="d-flex justify-content-center mb-3">
+                                        <input type="text" class="form-control" maxlength="1" />
+                                        <input type="text" class="form-control" maxlength="1" />
+                                        <input type="text" class="form-control" maxlength="1" />
+                                        <input type="text" class="form-control" maxlength="1" />
+                                        <input type="text" class="form-control" maxlength="1" />
+                                        <input type="text" class="form-control" maxlength="1" />
                                     </div>
-                                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Iniciar Sesión</h5>
-                                    <div class="form-outline mb-4">
-                                        <input type="email" id="form2Example17" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form2Example17">Usuario o Correo Electrónico</label>
-                                    </div>
-                                    <div class="form-outline mb-4">
-                                        <input type="password" id="form2Example27" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form2Example27">Contraseña</label>
-                                    </div>
-                                    <div class="pt-1 mb-4">
-                                        <button class="btn btn-primary btn-lg btn-block" type="button">Ingresar</button>
-                                    </div>
-                                    <a class="small text-muted" href="#!">¿Olvidaste tu contraseña?</a>
-                                    <p class="mb-5 pb-lg-2 text-primary">¿No tienes una cuenta? <a href="#!" class="text-primary">Regístrate aquí</a></p>
-                                    <a href="#!" class="small text-muted">Condiciones de uso.</a>
-                                    <a href="#!" class="small text-muted">Política de privacidad</a>
+                                    
+                                    <button class="btn btn-custom">Continuar</button>
                                 </form>
+                                <p class="mb-5 pb-lg-2" style="color: #393f81;"></p>
+                                <a href="#!" class="small text-muted">Condiciones de uso.</a>
+                                <a href="#!" class="small text-muted">Política de privacidad</a>
                             </div>
                         </div>
                     </div>
@@ -114,9 +126,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-
-
 
 
