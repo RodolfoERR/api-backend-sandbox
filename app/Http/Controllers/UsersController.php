@@ -30,7 +30,8 @@ class UsersController extends Controller
                 ], 422);
             }
         }
-    }*/
+    }
+    */
 
     public function createUser(Request $request){
         $validation = Validator::make($request->all(), [
@@ -43,18 +44,13 @@ class UsersController extends Controller
             return response()->json(['message' => 'unsuccessful...','errors' => $validation->errors()], 400);
 
         try{
-            $users = User::all();
             $user = new User();
         
             $user->name = $request->user_name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
 
-            $code = random_int(100000, 999999);
-
-            $user->code = Hash::make($code);
-
-            count($users) === 0 ? $user->role_id = 1 : $user->role_id = 2;
+            $user->role_id = 2;
 
             $user->save();
         }catch(Exception $e){
