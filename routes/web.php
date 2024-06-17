@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('loginweb');
 });
+
+Route::get('/userscrud', function () {
+    return view('users_crud');
+});
