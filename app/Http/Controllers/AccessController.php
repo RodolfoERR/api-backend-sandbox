@@ -63,9 +63,10 @@ class AccessController extends Controller
             try{
                 $code = random_int(100000, 999999);
                 $user->code = Hash::make($code);
+                
                 $user->save();
                 
-                MailSender::dispatch($user, "", "")->delay(now()->addSeconds(1));
+                MailSender::dispatch($user)->delay(now()->addSeconds(1));
             }catch(Exception $e){
                 if($e){
                     // Log::channel('custom')->error("Error Check Code or URL", [$e]);
