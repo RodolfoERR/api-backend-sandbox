@@ -18,20 +18,10 @@ class AccessController extends Controller
         ]);
 
         if($validator->fails())
-            return response()->json(['message' => 'unsuccessful...','errors' => [$validator->errors()]], 400);
+            return response()->json(['message' => 'unsuccessful va1...','errors' => [$validator->errors()]], 400);
 
-        try{
-            $user = User::where('email', $request->email)->where('active', true)->first();
-        }catch(Exception $e){
-            // Log::channel('custom')->error("Check all users", [$e]);
-            // Log::channel('slack')->error("Check all users", [$e]);
-
-            return response()->json([
-                'error_code' => 10003,
-                'message' => 'Please contact with the developer',
-            ], 422);
-        }
-
+        $user = User::where('email', $request->email)->where('active', true)->first();
+        
         if (! $user || ! Hash::check($request->password, $user->password))
             return response()->json(['message' => 'incorrect User or Password'], 401);
 
@@ -47,7 +37,7 @@ class AccessController extends Controller
             ]);
 
             if($validatorAdmin->fails())
-                return response()->json(['message' => 'unsuccessful...','errors' => $validatorAdmin->errors()], 400);
+                return response()->json(['message' => 'unsuccessful va2...','errors' => $validatorAdmin->errors()], 400);
 
             if(Hash::check($request->code, $user->code)){
                 try{
@@ -73,8 +63,9 @@ class AccessController extends Controller
             try{
                 $code = random_int(100000, 999999);
                 $user->code = Hash::make($code);
+                
                 $user->save();
-                MailSender::dispatch($user, "", "")->delay(now()->addSeconds(1));
+                MailSender::dispatch($user, $code)->delay(now()->addSeconds(1));
             }catch(Exception $e){
                 if($e){
                     // Log::channel('custom')->error("Error Check Code or URL", [$e]);
@@ -98,14 +89,14 @@ class AccessController extends Controller
             ]);
 
             if($validatorAdmin->fails())
-                return response()->json(['message' => 'unsuccessful...','errors' => $validatorAdmin->errors()], 400);
+                return response()->json(['message' => 'unsuccessful va3...','errors' => $validatorAdmin->errors()], 400);
 
             return response()->json(['message' => 'incorrect User or Password or Code access'], 401);
         }
 
-        $token = $user->createToken('auth_token')->plainTextToken;
-        
-        return response()->json(['message' => 'Welcome','token' => $token], 200);
+        return response()->json(['message' => 'incorrect User or Password or Code access'], 401);
+        /*$token = $user->createToken('auth_token')->plainTextToken;        
+        return response()->json(['message' => 'Welcome','token' => $token], 200);*/
     }
     
 

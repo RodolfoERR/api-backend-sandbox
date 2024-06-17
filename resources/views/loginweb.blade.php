@@ -96,6 +96,9 @@
                                         <button class="btn btn-primary btn-lg btn-block" type="button">Ingresar</button>
                                     </div>
                                     <a class="small text-muted" href="#!">¿Olvidaste tu contraseña?</a>
+                                    <br>
+                                    <a href="#!" class="small text-muted">Condiciones de uso.</a>
+                                    <a href="#!" class="small text-muted">Política de privacidad</a>
                                 </form>
                             </div>
                         </div>
