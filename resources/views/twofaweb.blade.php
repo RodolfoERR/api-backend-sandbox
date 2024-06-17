@@ -99,12 +99,7 @@
                                 <form>
                                     <p class="mb-3 text-primary">*Código de 6 dígitos</p>
                                     <div class="d-flex justify-content-center mb-3">
-                                        <input type="text" class="form-control" maxlength="1" />
-                                        <input type="text" class="form-control" maxlength="1" />
-                                        <input type="text" class="form-control" maxlength="1" />
-                                        <input type="text" class="form-control" maxlength="1" />
-                                        <input type="text" class="form-control" maxlength="1" />
-                                        <input type="text" class="form-control" maxlength="1" />
+                                        <input type="text" class="form-control" maxlength="6" />
                                     </div>
                                     
                                     <button class="btn btn-custom">Continuar</button>
