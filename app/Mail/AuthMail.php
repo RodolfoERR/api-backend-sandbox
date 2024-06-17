@@ -14,11 +14,13 @@ class AuthMail extends Mailable
 {
     use Queueable, SerializesModels;
     protected User $user;
+    protected string $code;
     /**
      * Create a new message instance.
      */
-    public function __construct(User $user){
+    public function __construct(User $user, string $code){
         $this->user = $user;
+        $this->code = $code;
     }
 
     /**
@@ -38,8 +40,8 @@ class AuthMail extends Mailable
         return new Content(
             view: 'auth2f',
             with: [
-                'name' => $this->user->name,
-                'code' => $this->user->code
+                'name' => $this->user->f_name,
+                'code' => $this->code
             ]
         );
     }

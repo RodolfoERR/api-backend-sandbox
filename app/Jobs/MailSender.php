@@ -16,17 +16,19 @@ class MailSender implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected User $user;
+    protected string $code;
     /**
      * Create a new job instance.
      */
-    public function __construct(User $user){
+    public function __construct(User $user, string $code){
         $this->user = $user;
+        $this->code = $code;
     }
 
     /**
      * Execute the job.
      */
     public function handle(): void{
-        Mail::to($this->user->email)->send(new AuthMail($this->user));
+        Mail::to($this->user->email)->send(new AuthMail($this->user, $this->code));
     }
 }
