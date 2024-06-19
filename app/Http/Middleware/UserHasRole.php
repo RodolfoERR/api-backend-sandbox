@@ -15,7 +15,7 @@ class UserHasRole
      */
     public function handle(Request $request, Closure $next, ...$roles): Response{
         foreach($roles as $role)
-            if ($request->user()->hasRol($role) == 1)
+            if ($request->user()->hasRol($role))
                 return $next($request);
 
         abort(403, 'Not Authorized');

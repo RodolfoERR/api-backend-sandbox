@@ -24,12 +24,12 @@ Route::prefix('v1')->group(function() {
         // Route::post('register', [UsersController::class, 'createUser']);
         Route::post('log-in', [AccessController::class, 'logIn']);
         
-        Route::middleware(['auth:sanctum', ''])->group(function(){
+        Route::middleware(['auth:sanctum', 'role:a'])->group(function(){
             Route::get('all-users', [UserController::class, 'index']);
             Route::post('create', [UserController::class, 'store']);
-            Route::get('show/{id}', [UserController::class, 'show']);
-            Route::put('update/{id}', [UserController::class, 'update']);
-            Route::delete('delete/{id}', [UserController::class, 'destroy']);
+            Route::get('show/{id}', [UserController::class, 'show'])->where('id', '[0-9]+');;
+            Route::put('update/{id}', [UserController::class, 'update'])->where('id', '[0-9]+');;
+            Route::delete('delete/{id}', [UserController::class, 'destroy'])->where('id', '[0-9]+');;
         });
         
         Route::middleware(['active', 'auth:sanctum'])->group(function(){
@@ -38,11 +38,11 @@ Route::prefix('v1')->group(function() {
         });
     });
     
-    Route::prefix('roles')->middleware(['auth:sanctum'])->group(function(){
+    Route::prefix('roles')->middleware(['auth:sanctum', 'role:a'])->group(function(){
         Route::get('all-roles', [RoleController::class, 'index']);
         Route::post('create', [RoleController::class, 'store']);
-        Route::get('show/{id}', [RoleController::class, 'show']);
-        Route::put('update/{id}', [RoleController::class, 'update']);
-        Route::delete('delete/{id}', [RoleController::class, 'destroy']);
+        Route::get('show/{id}', [RoleController::class, 'show'])->where('id', '[0-9]+');;
+        Route::put('update/{id}', [RoleController::class, 'update'])->where('id', '[0-9]+');;
+        Route::delete('delete/{id}', [RoleController::class, 'destroy'])->where('id', '[0-9]+');;
     });
 });

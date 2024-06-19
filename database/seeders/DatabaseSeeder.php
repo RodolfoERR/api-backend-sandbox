@@ -46,6 +46,8 @@ class DatabaseSeeder extends Seeder
         $user->phone = 0000000000;
         $user->email = 'mikecervantes2024@gmail.com';
         $user->password = Hash::make('admin.pass');
+        // $user->email = 'coriaedd@gmail.com';
+        // $user->password = Hash::make('kobeni');
         $user->active = true;
         $user->role_id = 1;
 
