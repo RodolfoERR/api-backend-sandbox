@@ -23,11 +23,14 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         /* Roles */
+
+        /* ID = 1 */
         $role = new Role();
         $role->name = 'a';
         $role->description = 'Admin';
         $role->save();
 
+        /* ID = 2 */
         $role = new Role();
         $role->name = 'u';
         $role->description = 'User';
