@@ -40,7 +40,7 @@ class UserController extends Controller
         ], 422);
     } catch (\Exception $e) {
         // Log the error and return a generic error message
-        // Log::error('Error creating user: ' . $e->getMessage());
+        //Log::error('Error creating user: ' . $e->getMessage());
         return response()->json(['error' => 'Error creating user'], 500);
     }
 }

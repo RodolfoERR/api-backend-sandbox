@@ -32,12 +32,12 @@ class AccessController extends Controller
                 'code' => 'required'
             ], [
                 'code' => [
-                    'required' => 'Check your Email'
+                    'required' => 'Please Check your Email, the code has already been sended'
                 ]
             ]);
 
             if($validatorAdmin->fails())
-                return response()->json(['message' => 'unsuccessful va2...','errors' => $validatorAdmin->errors()], 400);
+                return response()->json(['message' => 'unsuccessful...','errors' => $validatorAdmin->errors()], 400);
 
             if(Hash::check($request->code, $user->code)){
                 try{
@@ -84,12 +84,12 @@ class AccessController extends Controller
                 'code' => 'required'
             ], [
                 'code' => [
-                    'required' => 'Check your Email'
+                    'required' => 'Please Check your Email, the code has been generated and sended'
                 ]
             ]);
 
             if($validatorAdmin->fails())
-                return response()->json(['message' => 'unsuccessful va3...','errors' => $validatorAdmin->errors()], 400);
+                return response()->json(['message' => 'unsuccessful...','errors' => $validatorAdmin->errors()], 400);
 
             return response()->json(['message' => 'incorrect User or Password or Code access'], 401);
         }
