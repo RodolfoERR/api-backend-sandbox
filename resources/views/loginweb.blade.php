@@ -113,8 +113,18 @@
                     // Función que se ejecuta si la solicitud AJAX es exitosa
                     success: function(response) {
                         if (response.message === 'Welcome' && response.token) {
-                            // Redirige a la página del dashboard
-                            window.location.href = '{{ url("/dashboard") }}';
+                            // Almacenar el token en localStorage
+                            localStorage.setItem('auth_token', response.token);
+                            // Verificar si el token está presente en localStorage
+                            var authToken = localStorage.getItem('auth_token');
+                            // Verificar si el usuario intenta acceder a una ruta protegida sin token
+                            if (!authToken && window.location.pathname !== '{{ url("/api/v1/users/log-in") }}') {
+                                window.location.href = '{{ url("/api/v1/users/log-in") }}'; // Redirigir al login si no hay token
+                            }else{
+                                // Redirige a la página del dashboard (Falta proteger la ruta del dashboard)
+                                window.location.href = '{{ url("/dashboard") }}';
+                            }
+
                         } else {
                             // Muestra un mensaje genérico de error
                             $('#error-message').removeClass('d-none').text('Error en la verificación. Por favor, inténtelo de nuevo.');
