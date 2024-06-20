@@ -97,7 +97,7 @@
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">
+                    <a class="nav-link active" href="userscrud">
                         <i class="fas fa-user-plus"></i>
                         Añadir usuarios
                     </a>
@@ -109,7 +109,6 @@
     <!-- Barra de navegación superior -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#">
-           
             Control de almacén
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -121,26 +120,21 @@
                 <input type="search" placeholder="Buscar">
             </div>
             <ul class="navbar-nav">
-                
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-comments"></i></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </li>
             </ul>
         </div>
     </nav>
-
-    
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-
-
-
