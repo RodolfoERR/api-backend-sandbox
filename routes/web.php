@@ -18,18 +18,16 @@ Route::get('/', function () {
 });
 
 // Rutas para mostrar las vistas de login
-Route::get('login', function () {
-    return view('loginweb');
-})->name('login');
+// Route::get('login', function () {
+//     return view('loginweb');
+// })->name('login');
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/userscrud', function () {
-        return view('users_crud');
-    });
+// Route::middleware(['auth:sanctum'])->group(function () {
+//     Route::get('/userscrud', function () {
+//         return view('users_crud');
+//     });
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
-});
-
-
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     });
+// });
