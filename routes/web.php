@@ -13,21 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('loginweb');
-});
+
 
 // Rutas para mostrar las vistas de login
-// Route::get('login', function () {
-//     return view('loginweb');
-// })->name('login');
+Route::prefix('views')->group(function(){
+    Route::get('/', function () {
+        return view('loginweb');
+    });
 
-// Route::middleware(['auth:sanctum'])->group(function () {
-//     Route::get('/userscrud', function () {
-//         return view('users_crud');
-//     });
-
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     });
-// });
+    Route::get('login', function () {
+        return view('loginweb');
+    })->name('login');
+    
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/userscrud', function () {
+            return view('users_crud');
+        });
+    
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        });
+    });
+});
