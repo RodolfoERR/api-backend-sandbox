@@ -92,7 +92,7 @@
     <nav class="col-md-2 d-none d-md-block sidebar">
         <div class="sidebar-sticky">
             <div class="profile-section">
-                <img src= "https://www.movilzona.es/app/uploads-movilzona.es/2023/04/fto-perfil.jpg?x=480&y=375&quality=40" alt="Profile"> <!-- Ajusta el path de la imagen de perfil -->
+                <img src="https://www.movilzona.es/app/uploads-movilzona.es/2023/04/fto-perfil.jpg?x=480&y=375&quality=40" alt="Profile"> <!-- Ajusta el path de la imagen de perfil -->
                 <h4>Admin</h4>
             </div>
             <ul class="nav flex-column">
@@ -109,7 +109,6 @@
     <!-- Barra de navegación superior -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#">
-           
             Control de almacén
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -121,26 +120,43 @@
                 <input type="search" placeholder="Buscar">
             </div>
             <ul class="navbar-nav">
-                
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-comments"></i></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="logoutButton">Cerrar Sesión</a>
+                </li>
             </ul>
         </div>
     </nav>
 
-    
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#logoutButton').click(function(e) {
+                e.preventDefault();
+                
+                $.ajax({
+                    url: '{{ url("/api/v1/users/log-out") }}',
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
+                    },
+                    success: function(response) {
+                        localStorage.removeItem('auth_token');
+                        window.location.href = '{{ url("http://127.0.0.1:8000") }}';
+                    },
+                    error: function(response) {
+                        console.error('Error en la solicitud de cierre de sesión', response);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
