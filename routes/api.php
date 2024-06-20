@@ -18,6 +18,10 @@ use App\Http\Controllers\RoleController;
 |
 */
 
+Route::prefix('prueba')->group(function(){
+
+});
+
 // routes/api.php
 Route::prefix('v1')->group(function() {
     Route::prefix('users')->group(function() {
@@ -25,6 +29,8 @@ Route::prefix('v1')->group(function() {
         Route::post('log-in', [AccessController::class, 'logIn']);
         
         Route::middleware(['auth:sanctum', 'role:a'])->group(function(){
+            Route::get('get-Myself', [UsersController::class, 'getMyself']);
+            
             Route::get('all-users', [UserController::class, 'index']);
             Route::post('create', [UserController::class, 'store']);
             Route::get('show/{id}', [UserController::class, 'show'])->where('id', '[0-9]+');;
@@ -33,7 +39,6 @@ Route::prefix('v1')->group(function() {
         });
         
         Route::middleware(['active', 'auth:sanctum'])->group(function(){
-            // Route::get('get-Myself', [UsersController::class, 'getMyself']);
             Route::delete('log-out', [AccessController::class, 'logOut']);
         });
     });

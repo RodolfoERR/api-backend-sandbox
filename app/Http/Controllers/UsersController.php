@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
-    /*
+    
     public function getMyself(Request $request){
         try{
             return response()->json([
@@ -31,7 +31,6 @@ class UsersController extends Controller
             }
         }
     }
-    */
 
     public function createUser(Request $request){
         $validation = Validator::make($request->all(), [
