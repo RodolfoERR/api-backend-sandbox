@@ -3,6 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2FA Verification</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .vh-100 {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .vh-100::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://wallpapercave.com/wp/wp10981468.jpg') no-repeat center center/cover;
+            filter: blur(5px);
+            z-index: -1;
+        }
+        .card {
+            border-radius: 1rem;
+            background-color: #FFFFFF;
+        }
+        .verification-card {
+            border-radius: 1rem;
+            padding: 2rem;
+            background: #e0e0e0;
+            text-align: center;
+        }
+        .verification-card .form-control {
+            display: inline-block;
+            width: 40px;
+            text-align: center;
+            margin: 0 5px;
+        }
+        .btn-custom {
+            background-color: #007EE5; /* Azul de Dropbox */
+            color: white;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #005bb5;
+        }
+        .form-outline {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .form-label {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            transition: 0.3s ease;
+            color: #6c757d;
+        }
+        .form-control:focus ~ .form-label,
+        .form-control:not(:placeholder-shown) ~ .form-label {
+            top: -0.75rem;
+            left: 0.75rem;
+            font-size: 0.75rem;
+            color: #495057;
+        }
+        .text-primary {
+            color: #007EE5 !important; /* Azul de Dropbox */
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">

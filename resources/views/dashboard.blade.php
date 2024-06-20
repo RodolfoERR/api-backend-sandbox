@@ -97,7 +97,7 @@
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">
+                    <a class="nav-link active" href="userscrud">
                         <i class="fas fa-user-plus"></i>
                         Añadir usuarios
                     </a>
@@ -132,6 +132,8 @@
             </ul>
         </div>
     </nav>
+
+    
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
