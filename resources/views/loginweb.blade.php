@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2FA Verification</title>
+    <title>LOGIN</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for Icons -->
@@ -77,16 +77,6 @@
             color: #007EE5 !important; /* Azul de Dropbox */
         }
     </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        /* Estilos CSS aquí */
-    </style>
 </head>
 <body>
     <section class="vh-100">
@@ -109,27 +99,28 @@
                                             <span class="h1 fw-bold mb-0"> Control de Almacén</span>
                                         </div>
                                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Iniciar Sesión</h5>
-                                        <div class="form-outline mb-4">
+                                        <div class="form-outline mb-4" id="loginFields">
                                             <input type="email" id="form2Example17" class="form-control form-control-lg" name="email" required />
                                             <label class="form-label" for="form2Example17">Usuario o Correo Electrónico</label>
                                         </div>
-                                        <div class="form-outline mb-4">
+                                        <div class="form-outline mb-4" id="passwordField">
                                             <input type="password" id="form2Example27" class="form-control form-control-lg" name="password" required />
                                             <label class="form-label" for="form2Example27">Contraseña</label>
                                         </div>
-                                        <div class="pt-1 mb-4">
+                                        <div class="pt-1 mb-4" id="loginButtonField">
                                             <button class="btn btn-primary btn-lg btn-block" type="button" id="loginButton">Ingresar</button>
                                         </div>
                                         <!-- Mensaje de error -->
                                         <div id="error-message" class="alert alert-danger d-none"></div>
+                                        <!-- Campo de código de verificación (inicialmente oculto) -->
+                                        <div class="form-outline mb-4 d-none" id="verificationField">
+                                            <input type="text" id="form2Example37" class="form-control form-control-lg" name="code" required value="" />
+                                            <br>
+                                            <label class="form-label" for="form2Example37">Código de verificación</label>
+                                            <br>
+                                            <button id="verificationButton" type="button" class="btn btn-primary">Verificar</button>
+                                        </div>
                                     </form>
-
-                                    <!-- Campo de código de verificación (inicialmente oculto) -->
-                                    <div class="form-outline mb-4 d-none" id="verificationField">
-                                        <input type="text" id="form2Example37" class="form-control form-control-lg" name="code" required value="" />
-                                        <label class="form-label" for="form2Example37">Código de verificación</label>
-                                        <button id="verificationButton" type="button" class="btn btn-primary">Verificar</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +150,8 @@
                     error: function(response) {
                         // Si la respuesta tiene el mensaje específico de error de verificación
                         if (response.responseJSON.message === 'unsuccessful...' && response.responseJSON.errors && response.responseJSON.errors.code) {
-                            // Muestra el campo de código de verificación
+                            // Ocultar los campos de login y mostrar el campo de verificación
+                            $('#loginFields, #passwordField, #loginButtonField').addClass('d-none');
                             $('#verificationField').removeClass('d-none');
 
                             // Opcional: Puedes mostrar un mensaje adicional al usuario si lo deseas
@@ -176,9 +168,6 @@
                 e.preventDefault(); // Previene el comportamiento por defecto del botón (enviar el formulario)
 
                 var form = $('#loginForm'); // Selecciona el formulario de inicio de sesión por su ID
-
-                // Añade el campo de código al formulario de inicio de sesión
-                form.append('<input type="text" name="code" value="' + $('#form2Example37').val() + '" />');
 
                 // Envía una solicitud AJAX al servidor para la verificación del código
                 $.ajax({
@@ -216,4 +205,3 @@
     </script>
 </body>
 </html>
-
