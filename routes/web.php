@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
+Route::get('/', function () {
+    return view('loginweb');
+});
 // Rutas para mostrar las vistas de login
 Route::prefix('views')->group(function(){
     Route::get('/', function () {
@@ -25,13 +27,11 @@ Route::prefix('views')->group(function(){
         return view('loginweb');
     })->name('login');
     
-    Route::middleware(['auth'])->group(function () {
-        Route::get('/userscrud', function () {
-            return view('users_crud');
-        });
-    
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        });
-    });
+    Route::get('dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('userscrud', function () {
+        return view('users_crud');
+    })->name('userscrud');
 });
