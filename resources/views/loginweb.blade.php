@@ -169,6 +169,9 @@
 
                 var form = $('#loginForm'); // Selecciona el formulario de inicio de sesión por su ID
 
+                // Añade el campo de código al formulario de inicio de sesión
+                //form.append('<input type="text" name="code" value="' + $('#form2Example37').val() + '" />');
+
                 // Envía una solicitud AJAX al servidor para la verificación del código
                 $.ajax({
                     url: form.attr('action'), // URL a la que se enviará la solicitud (definida en el atributo 'action' del formulario)
@@ -177,27 +180,39 @@
 
                     // Función que se ejecuta si la solicitud AJAX es exitosa
                     success: function(response) {
+                        // Verifica si la respuesta del servidor es 'Welcome' y si se ha recibido un token válido
                         if (response.message === 'Welcome' && response.token) {
-                            // Almacenar el token en localStorage
+                            // Almacena el token en localStorage para sesiones posteriores
                             localStorage.setItem('auth_token', response.token);
-                            // Verificar si el token está presente en localStorage
-                            var authToken = localStorage.getItem('auth_token');
-                            // Verificar si el usuario intenta acceder a una ruta protegida sin token
-                            if (!authToken && window.location.pathname !== '{{ url("/api/v1/users/log-in") }}') {
-                                window.location.href = '{{ url("/api/v1/users/log-in") }}'; // Redirigir al login si no hay token
-                            }else{
-                                // Redirige a la página del dashboard (Falta proteger la ruta del dashboard)
-                                window.location.href = '{{ url("/dashboard") }}';
-                            }
 
+                            // Verifica si el token está presente en localStorage
+                            var authToken = localStorage.getItem('auth_token');
+                            console.log(authToken)
+                            if (!authToken) {
+                                // Redirige al usuario al login si no hay token válido
+                                window.location.href = '{{ url("/views/login") }}';
+                                 // Mostrar mensaje de error si no es administrador
+                                 $('#error-message').removeClass('d-none').text('No tiene permisos de administrador.');
+                            } else {
+                                // Si hay token válido, realiza otra solicitud AJAX para obtener información del usuario
+                                window.location.replace('{{ url("/views/dashboard") }}')
+                            }
                         } else {
-                            // Muestra un mensaje genérico de error
+                            // Si la respuesta no es exitosa (por ejemplo, datos incorrectos), muestra un mensaje de error
                             $('#error-message').removeClass('d-none').text('Error en la verificación. Por favor, inténtelo de nuevo.');
                         }
                     },
+                    // Función que se ejecuta si hay un error en la solicitud AJAX
                     error: function(response) {
-                        // Muestra un mensaje genérico de error
-                        $('#error-message').removeClass('d-none').text('Error en la verificación. Por favor, inténtelo de nuevo.');
+                        // Si la respuesta tiene el mensaje específico de error de verificación
+                        if (response.responseJSON.message === 'unsuccessful...' && response.responseJSON.errors && response.responseJSON.errors.code) {
+                            // Muestra el campo de código de verificación
+                            $('#verificationField').removeClass('d-none');
+                            alert('Por favor, revisa tu correo electrónico. Se ha generado y enviado un código.');
+                        } else {
+                            // Si no es la respuesta esperada, muestra un mensaje genérico de error
+                            $('#error-message').removeClass('d-none').text('Error en la verificación. Por favor, inténtelo de nuevo.');
+                        }
                     }
                 });
             });
