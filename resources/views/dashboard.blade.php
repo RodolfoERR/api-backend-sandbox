@@ -108,7 +108,7 @@
 
     <!-- Barra de navegación superior -->
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="dashboard">
             Control de almacén
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -159,6 +159,35 @@
                 });
             });
         });
+    </script>
+    <script>
+        $(document).ready(function() {
+        // Verificar si hay un token en localStorage
+        var authToken = localStorage.getItem('auth_token');
+
+        if (!authToken) {
+            // Redirigir al login si no hay token
+            window.location.href = '{{ url("/views/login") }}';
+        } else {
+            // Opcional: Verificar el token con una solicitud al servidor para asegurarse de que es válido
+            $.ajax({
+                url: '{{ url("/api/v1/users/get-Myself") }}', // Ruta para obtener información del usuario autenticado
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authToken
+                },
+                success: function(response) {
+                    // Token válido, el usuario puede permanecer en la página
+                    console.log('Usuario autenticado:', response);
+                },
+                error: function(xhr, status, error) {
+                    // Token no válido, redirigir al login
+                    localStorage.removeItem('auth_token');
+                    window.location.href = '{{ url("/views/loginweb") }}';
+                }
+            });
+        }
+    });
     </script>
 </body>
 </html>
