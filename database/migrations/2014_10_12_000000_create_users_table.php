@@ -21,7 +21,7 @@ return new class extends Migration
                 ->nullable(false);
             $table->string('l_name')
                 ->nullable(false);
-            $table->unsignedTinyInteger('phone')
+            $table->char('phone', 10)
                 ->nulleable(false);
             $table->boolean('active')
                 ->default(false);
