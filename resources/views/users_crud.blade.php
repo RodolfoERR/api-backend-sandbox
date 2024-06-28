@@ -6,6 +6,7 @@
     <title>Usuarios</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         .card-header {
             background-color: #007EE5; /* Azul de Dropbox */
@@ -162,6 +163,21 @@
                     <a class="nav-link active" href="userscrud">
                         <i class="fas fa-user-plus"></i>
                         Usuarios
+                        <hr>
+                    </a>
+                </li>
+                <li>
+                <a class="nav-link active" href="refacciones">
+                        <i class="fas fa-user-plus"></i>
+                        Refacciones
+                        <hr>
+                    </a>
+                </li>
+                <li>
+                <a class="nav-link active" href="historyrefacciones">
+                        <i class="fas fa-user-plus"></i>
+                        Historial de Refacciones
+                        <hr>
                     </a>
                 </li>
             </ul>
@@ -366,7 +382,7 @@
             e.preventDefault();
             let id = $('#userId').val();
             let method = id ? 'PUT' : 'POST';
-            let url = id ? '{{ url("/api/v1/users/update/") }}' + id : '{{ url("/api/v1/users/create") }}';
+            let url = id ? '/api/v1/users/update/' + id : '/api/v1/users/create';
 
             $.ajax({
                 url: url,
@@ -390,7 +406,7 @@
         function deleteUser(id) {
             if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
                 $.ajax({
-                    url: '{{ url("/api/v1/users/delete/") }}' + id,
+                    url: '/api/v1/users/delete/' + id,
                     method: 'DELETE',
                     success: function(response) {
                         alert('Usuario eliminado exitosamente');
