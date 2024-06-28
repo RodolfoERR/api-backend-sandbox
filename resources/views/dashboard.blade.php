@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         .card-header {
@@ -16,22 +17,23 @@
             background-color: #3D3D3D; /* Gris oscuro de Dropbox */
             color: white;
             position: fixed;
-            top: 0;
+            top: 56px; /* Altura de la barra de navegación */
             left: 0;
             padding-top: 20px;
             width: 250px;
+            overflow-y: auto;
         }
         .main-content {
             margin-left: 250px;
             padding: 20px;
             background-color: #F4F4F4; /* Gris claro de Dropbox */
+            margin-top: 56px; /* Altura de la barra de navegación */
         }
         .navbar {
             background-color: #007EE5; /* Azul de Dropbox */
             z-index: 1000;
             position: fixed;
-            width: calc(100% - 250px);
-            left: 250px;
+            width: 100%;
             top: 0;
         }
         .navbar-brand, .nav-link {
@@ -85,6 +87,11 @@
             margin-top: 10px;
             color: white;
         }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #FFFFFF;
+            color: #3D464D;
+        }
     </style>
 </head>
 <body>
@@ -99,7 +106,22 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="userscrud">
                         <i class="fas fa-user-plus"></i>
-                        Añadir usuarios
+                        Usuarios
+                        <hr>
+                    </a>
+                </li>
+                <li>
+                <a class="nav-link active" href="refacciones">
+                        <i class="fas fa-user-plus"></i>
+                        Refacciones
+                        <hr>
+                    </a>
+                </li>
+                <li>
+                <a class="nav-link active" href="historyrefacciones">
+                        <i class="fas fa-user-plus"></i>
+                        Historial de Refacciones
+                        <hr>
                     </a>
                 </li>
             </ul>
