@@ -72,7 +72,7 @@ class UserController extends Controller
             'phone' => 'numeric',
             'active' => 'boolean',
             'password' => 'required',
-            'code' => 'required|size:6',
+            'code' => 'nullable|size:6',
             'role_id' => 'required|exists:roles,id',
             'email_verified_at' => 'nullable|date',
         ]);
