@@ -18,20 +18,32 @@ class UserController extends Controller
     public function store(Request $request)
 {
     try {
-        $validated = $request->validate([
-            'email' => 'required|email|unique:users',
-            'f_name' => 'required',
-            'l_name' => 'required',
-            'phone' => 'required|string',
-            'active' => 'boolean',
-            'password' => 'required',
-            'code' => 'required|size:6',
-            'role_id' => 'required|exists:roles,id',
-            'email_verified_at' => 'nullable|date',
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+            'f_name' => 'required|string|max:255',
+            'l_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'active' => 'required|boolean',
+            'code' => 'nullable|string|max:255',
+            'fingerprint' => 'nullable|string|max:255',
+            'role_id' => 'required|integer|exists:roles,id',
         ]);
 
-        $user = User::create($validated);
+        $user = new User();
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->f_name = $request->f_name;
+        $user->l_name = $request->l_name;
+        $user->phone = $request->phone;
+        $user->active = $request->active;
+        $user->code = $request->code;
+        $user->fingerprint = $request->fingerprint;
+        $user->role_id = $request->role_id;
+        $user->save();
+
         return response()->json($user, 201);
+        
     } catch (\Illuminate\Validation\ValidationException $e) {
         // Return the validation errors
         return response()->json([
@@ -40,7 +52,7 @@ class UserController extends Controller
     } catch (\Exception $e) {
         // Log the error and return a generic error message
         //Log::error('Error creating user: ' . $e->getMessage());
-        return response()->json(['error' => 'Error creating user'], 500);
+        return response()->json(['error' => 'Error creating user'. $e->getMessage()], 500);
     }
 }
 
