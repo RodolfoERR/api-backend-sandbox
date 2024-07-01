@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Level;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 use App\Models\User;
@@ -51,5 +53,12 @@ class DatabaseSeeder extends Seeder
         $user->role_id = 1;
 
         $user->save();
+
+        /* Levels */
+        for($i = 1; $i <= 4; $i ++){
+            $level = new Level();
+            $level->name = "lvl".(string)$i;
+            $level->save();
+        }
     }
 }

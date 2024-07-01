@@ -69,8 +69,8 @@ class UsersController extends Controller
             MailSender::dispatch($user, $url, "register")->delay(now()->addSeconds(1));
         }catch(Exception $e){
             if($e){
-                Log::channel('custom')->error($request, [$e]);
-                Log::channel('slack')->error($request, [$e]);
+                // Log::channel('custom')->error($request, [$e]);
+                // Log::channel('slack')->error($request, [$e]);
 
                 return response()->json([
                     'error_code' => 10001,

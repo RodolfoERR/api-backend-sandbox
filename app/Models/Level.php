@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Level extends Model
 {
     use HasFactory;
+
+    public function shelf(){
+        return $this->hasMany(Shelf::class);
+    }
 }
