@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->string('name')
                 ->nullable(false);
-            $table->text('descriprion')
+            $table->text('description')
                 ->nullable();
             $table->unsignedInteger('total_quantity')
                 ->nullable(false);
@@ -32,6 +32,8 @@ return new class extends Migration
             $table->foreignId('location_id')
                 ->constrained('shelves')
                 ->references('id');
+
+            $table->string('image');
 
             $table->timestamps();
         });
