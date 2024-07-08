@@ -25,6 +25,13 @@ class AccessController extends Controller
         if (! $user || ! Hash::check($request->password, $user->password))
             return response()->json(['message' => 'incorrect User or Password'], 401);
 
+        if($user->role_id === 2 && $user->active == true){
+            $token = $user->createToken('auth_token')->plainTextToken;
+            $user->save();
+
+            return response()->json(['message' => 'welcome', 'token' => $token]);
+        }
+
         if($user->role_id === 1 && $user->code !== null){
             $validatorAdmin = Validator::make($request->all(), [
                 'email' => 'required|email',
