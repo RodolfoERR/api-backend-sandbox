@@ -29,7 +29,7 @@ class AccessController extends Controller
             $token = $user->createToken('auth_token')->plainTextToken;
             $user->save();
 
-            return response()->json(['sucess' => true, 'message' => 'welcome', 'token' => $token], 200);
+            return response()->json(['success' => true, 'message' => 'welcome', 'token' => $token], 200);
         }
 
         if($user->role_id === 1 && $user->code !== null){
