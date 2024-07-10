@@ -22,7 +22,7 @@ class ShelvesController extends Controller
 
     public function getByID(int $id){
         try{
-            $location = Shelf::find($id)->with('level')->first();
+            $location = Shelf::with('level')->findOrFail($id);
 
             if(!$location)
                 return response()->json(['message'=>'Not found'], 404);

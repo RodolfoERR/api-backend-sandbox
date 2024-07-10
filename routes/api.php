@@ -69,5 +69,6 @@ Route::prefix('v1')->group(function() {
     Route::prefix('refactions')->middleware(['auth:sanctum', 'role:a'])->group(function() {
         Route::post('create', [RefactionsController::class, 'createRefaction']);
         Route::get('all', [RefactionsController::class, 'readAllRefactions']);
+        Route::put('update/{id}', [RefactionsController::class, 'editRefaction'])->where('id', '[0-9]+');
     });
 });
