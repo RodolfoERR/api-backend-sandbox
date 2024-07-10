@@ -56,14 +56,13 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $request->validate([
             'name' => 'required|max:15',
             'description' => 'required',
         ]);
 
-        $role = Role::find($id);
+        $role = Role::findOrFail($id);
 
         if (!$role) {
             return response()->json(['error' => 'Role not found'], 404);

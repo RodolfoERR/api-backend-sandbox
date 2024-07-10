@@ -69,7 +69,7 @@ class ShelvesController extends Controller
 
     public function updateLocation(Request $request, int $id){
         try{
-            $location = Shelf::find($id)->first();
+            $location = Shelf::findOrFail($id);
             
             if(!$location)
                 return response()->json(['message' => 'Not found'], 404);
