@@ -46,7 +46,7 @@ class TypesController extends Controller
 
     public function updateType(Request $request, int $id){
         try{
-            $type = Type::find($id)->first();
+            $type = Type::findOrFail($id);
             
             if(!$type)
                 return response()->json(['message' => 'Not found'], 404);
