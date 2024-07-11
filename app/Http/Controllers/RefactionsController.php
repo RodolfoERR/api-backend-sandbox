@@ -23,7 +23,6 @@ class RefactionsController extends Controller
     }
 
     public function createRefaction(Request $request){
-        return $request;
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:refactions,name',
             'description' => 'required',
