@@ -34,4 +34,15 @@ Route::prefix('views')->group(function(){
     Route::get('userscrud', function () {
         return view('users_crud');
     })->name('userscrud');
+    /*Líneas temporales para borrar.*/
+
+    Route::get('types', function () {
+        return view('types');
+    })->name('types');
+
+    Route::get('locations', function () {
+        return view('locations');
+    })->name('locations');
+
+    /*Líneas temporales para borrar.*/
 });
