@@ -11,10 +11,11 @@ class RefactionsController extends Controller
 {
     public function readAllRefactions(){
         try{
-            $refactions = Refaction::all()->map(function ($refaction) {
+            $refactions = Refaction::with(['type', 'location.level'])->get()->map(function ($refaction) {
                 $refaction->image_url = url('images/' . $refaction->image);
                 return $refaction;
             });
+
             return response()->json(['message' => 'success', 'data' => $refactions], 200, [], JSON_UNESCAPED_SLASHES);
         }catch(Exception $e){
             if($e)
@@ -149,6 +150,21 @@ class RefactionsController extends Controller
         $refaction->save();
 
         return $refaction;
+    }
+
+    public function deleteRefaction(int $id){
+        try{
+            $refaction = Refaction::findOrFail($id);
+            if(!$refaction)
+                return response()->json(['message'=>'Not found'], 404);
+            $refaction->active = false;
+            $refaction->save();
+
+            return response()->json(['message'=>'removed']);
+        }catch(Exception $e){
+            if($e)
+                $this->messageError('deleteRefaction Function'); 
+        }
     }
 
     private function messageError($error){

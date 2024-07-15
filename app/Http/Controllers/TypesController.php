@@ -63,22 +63,22 @@ class TypesController extends Controller
         }
     }
 
-    // public function deleteType(int $id) {
-    //     try{
-    //         $type = Type::find($id)->first();
+    public function deleteType(int $id) {
+        try{
+            $type = Type::findOrFail($id);
 
-    //         if(!$type)
-    //             return response()->json(['message'=>'Not found'], 404);
+            if(!$type)
+                return response()->json(['message'=>'Not found'], 404);
 
-    //         $type->active = false;
-    //         $type->save();
+            $type->active = false;
+            $type->save();
 
-    //         return response()->json(['message'=>'removed']);
-    //     }catch(Exception $e){
-    //        if($e)
-    //         $this->messageError('deleteType Function'); 
-    //     }
-    // }
+            return response()->json(['message'=>'removed']);
+        }catch(Exception $e){
+           if($e)
+            $this->messageError('deleteType Function'); 
+        }
+    }
 
     private function messageError($error){
         return response()->json(['message' => 'Contacta al desarrollador, error en'.$error], 400);

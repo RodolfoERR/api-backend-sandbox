@@ -22,10 +22,6 @@ use App\Models\Refaction;
 |
 */
 
-Route::prefix('prueba')->group(function(){
-
-});
-
 Route::prefix('v1')->group(function() {
     Route::prefix('users')->group(function() {
         Route::post('log-in', [AccessController::class, 'logIn']);
@@ -38,11 +34,12 @@ Route::prefix('v1')->group(function() {
             Route::get('show/{id}', [UserController::class, 'show'])->where('id', '[0-9]+');;
             Route::put('update/{id}', [UserController::class, 'update'])->where('id', '[0-9]+');;
             Route::delete('delete/{id}', [UserController::class, 'destroy'])->where('id', '[0-9]+');;
+            
+            Route::middleware(['active', 'auth:sanctum'])->group(function(){
+                Route::delete('log-out', [AccessController::class, 'logOut']);
+            });
         });
         
-        Route::middleware(['active', 'auth:sanctum'])->group(function(){
-            Route::delete('log-out', [AccessController::class, 'logOut']);
-        });
     });
     
     Route::prefix('roles')->middleware(['auth:sanctum', 'role:a'])->group(function(){
@@ -65,13 +62,14 @@ Route::prefix('v1')->group(function() {
         Route::get('all-types', [TypesController::class, 'readTypes']);
         Route::post('create', [TypesController::class, 'createType']);
         Route::put('update/{id}', [TypesController::class, 'updateType'])->where('id', '[0-9]+');
+        Route::delete('delete/{id}', [TypesController::class, 'deleteType'])->where('id', '[0-9]+');
     });
 
     Route::prefix('refactions')->middleware(['auth:sanctum', 'role:a'])->group(function() {
         Route::get('all', [RefactionsController::class, 'readAllRefactions']);
         Route::post('create', [RefactionsController::class, 'createRefaction']);
-        
         Route::post('update/{id}', [RefactionsController::class, 'editRefaction'])->where('id', '[0-9]+');
         Route::put('taking/{id}', [RefactionsController::class, 'takingRefactions'])->where('id', '[0-9]+');
+        Route::delete('delete/{id}', [RefactionsController::class, 'deleteRefaction'])->where('id', '[0-9]+');
     });
 });

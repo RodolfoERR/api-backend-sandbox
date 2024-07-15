@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     use HasFactory;
+
+    public function refaction(){
+        return $this->hasMany(Refaction::class);
+    }
 }
