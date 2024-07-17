@@ -23,6 +23,42 @@ class RefactionsController extends Controller
         }
     }
 
+    public function readAllRefactionsMinus(){
+        try{
+            $refactions = Refaction::with('type')->get()->map(function ($refaction) {
+                $refaction->image_url = url('images/' . $refaction->image);
+                return $refaction;
+            });
+
+            $hiddenRefaction = [
+                'description',
+                'total_quantity',
+                'unit_price',
+                'active',
+                'type_id',
+                'location_id',
+                'image',
+                'created_at',
+                'updated_at'
+            ];
+
+            $hiddenType = [
+                'created_at',
+                'updated_at'
+            ];
+
+            foreach ($refactions as $refaction){
+                $refaction->setHidden($hiddenRefaction);
+                $refaction->type->setHidden($hiddenType);
+            }
+
+            return response()->json(['message' => 'success', 'data' => $refactions], 200, [], JSON_UNESCAPED_SLASHES);
+        }catch(Exception $e){
+            if($e)
+                $this->messageError('readAllRefactions Function');
+        }
+    }
+
     public function createRefaction(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:refactions,name',
