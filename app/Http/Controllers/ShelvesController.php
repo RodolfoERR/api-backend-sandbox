@@ -60,11 +60,9 @@ class ShelvesController extends Controller
 
             return response()->json(['message' => 'success...', 'data' => $shelf], 202);
         }catch(Exception $e){
-            if($e){
+            if($e)
                 $this->messageError('createLocation Function');
-            }
         }
-        
     }
 
     public function updateLocation(Request $request, int $id){
@@ -81,9 +79,8 @@ class ShelvesController extends Controller
             
             return response()->json(['message' => 'success...', 'data' => $location], 202);
         }catch(Exception $e){
-            if($e){
+            if($e)
                 $this->messageError('createLocation Function');
-            }
         }  
     }
 
@@ -99,8 +96,8 @@ class ShelvesController extends Controller
 
             return response()->json(['message'=>'removed']);
         }catch(Exception $e){
-           if($e)
-            $this->messageError('removeLocation Function'); 
+            if($e)
+                $this->messageError('removeLocation Function'); 
         }
     }
 

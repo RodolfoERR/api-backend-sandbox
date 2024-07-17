@@ -65,11 +65,14 @@ Route::prefix('v1')->group(function() {
         Route::delete('delete/{id}', [TypesController::class, 'deleteType'])->where('id', '[0-9]+');
     });
 
-    Route::prefix('refactions')->middleware(['auth:sanctum', 'role:a'])->group(function() {
+    Route::prefix('refactions')->middleware(['auth:sanctum'])->group(function() {
         Route::get('all', [RefactionsController::class, 'readAllRefactions']);
-        Route::post('create', [RefactionsController::class, 'createRefaction']);
-        Route::post('update/{id}', [RefactionsController::class, 'editRefaction'])->where('id', '[0-9]+');
-        Route::put('taking/{id}', [RefactionsController::class, 'takingRefactions'])->where('id', '[0-9]+');
-        Route::delete('delete/{id}', [RefactionsController::class, 'deleteRefaction'])->where('id', '[0-9]+');
+        
+        Route::middleware('role:a')->group(function(){
+            Route::post('create', [RefactionsController::class, 'createRefaction']);
+            Route::post('update/{id}', [RefactionsController::class, 'editRefaction'])->where('id', '[0-9]+');
+            Route::put('taking/{id}', [RefactionsController::class, 'takingRefactions'])->where('id', '[0-9]+');
+            Route::delete('delete/{id}', [RefactionsController::class, 'deleteRefaction'])->where('id', '[0-9]+');
+        });
     });
 });
