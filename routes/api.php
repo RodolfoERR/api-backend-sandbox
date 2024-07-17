@@ -37,7 +37,7 @@ Route::prefix('v1')->group(function() {
             Route::delete('delete/{id}', [UserController::class, 'destroy'])->where('id', '[0-9]+');;
             
         });
-        
+
         Route::middleware(['active', 'auth:sanctum'])->group(function(){
             Route::delete('log-out', [AccessController::class, 'logOut']);
         });
