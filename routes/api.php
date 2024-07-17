@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\RefactionsController;
+use App\Http\Controllers\RegistersController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -72,8 +73,13 @@ Route::prefix('v1')->group(function() {
             Route::get('all', [RefactionsController::class, 'readAllRefactions']);
             Route::post('create', [RefactionsController::class, 'createRefaction']);
             Route::post('update/{id}', [RefactionsController::class, 'editRefaction'])->where('id', '[0-9]+');
-            Route::put('taking/{id}', [RefactionsController::class, 'takingRefactions'])->where('id', '[0-9]+');
+            Route::put('taking/{id}', [RefactionsController::class, 'takingRefaction'])->where('id', '[0-9]+');
+            Route::put('replenishment/{id}', [RefactionsController::class, 'replenishmentRefaction'])->where('id', '[0-9]+');
             Route::delete('delete/{id}', [RefactionsController::class, 'deleteRefaction'])->where('id', '[0-9]+');
         });
+    });
+
+    Route::prefix('reports')->middleware(['auth:sanctum', 'role:a'])->group(function() {
+        Route::post('create', [RegistersController::class, 'createReport']);
     });
 });

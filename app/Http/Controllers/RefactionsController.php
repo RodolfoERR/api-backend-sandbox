@@ -164,7 +164,7 @@ class RefactionsController extends Controller
     }
     
 
-    public function takingRefactions(Request $request, int $id){
+    public function takingRefaction(Request $request, int $id){
         $validator = Validator::make($request->all(), [
             'quantity' => 'numeric|min:1'
         ],[
@@ -174,18 +174,47 @@ class RefactionsController extends Controller
 
         if($validator->fails())
             return response()->json(['error' => 'Datos no aceptados', 'errors' => $validator->errors()], 400);
+        try{
+            $refaction = Refaction::findOrFail($id);
+    
+            if($refaction->total_quantity < $request->quantity)
+                return response()->json(['error' => 'Datos no aceptados', 'errors' => 'No puedes sacar mas de la cantidad existente']);
+    
+            $newTotal = $refaction->total_quantity - $request->quantity;
+            $refaction->total_quantity = $newTotal;
+    
+            $refaction->save();
+    
+            return response()->json(['message'=>'accion establecida correctamente']);
+        }catch(Exception $e){
+            if($e)
+                $this->messageError("takingRefaction function");
+        }
+    }
 
-        $refaction = Refaction::findOrFail($id);
+    public function replenishmentRefaction(Request $request, int $id){
+        $validator = Validator::make($request->all(), [
+            'quantity' => 'numeric|min:1'
+        ],[
+            'quantity.numeric' => 'Necesitamos un numero',
+            'quantity.min' => 'Necesitas reabastecer por lo menos un objeto'
+        ]);
 
-        if($refaction->total_quantity < $request->quantity)
-            return response()->json(['error' => 'Datos no aceptados', 'errors' => 'No puedes sacar mas de la cantidad existente']);
-
-        $newTotal = $refaction->total_quantity - $request->quantity;
-        $refaction->total_quantity = $newTotal;
-
-        $refaction->save();
-
-        return $refaction;
+        if($validator->fails())
+            return response()->json(['error' => 'Datos no aceptados', 'errors' => $validator->errors()], 400);
+        try{
+            $refaction = Refaction::findOrFail($id);
+    
+            $newTotal = $refaction->total_quantity + $request->quantity;
+            $refaction->total_quantity = $newTotal;
+    
+            $refaction->save();
+    
+            return response()->json(['message'=>'accion establecida correctamente']);
+        }catch(Exception $e){
+            if($e)
+                $this->messageError("replenishmentRefaction function");
+        }
     }
 
     public function deleteRefaction(int $id){
