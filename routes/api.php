@@ -36,11 +36,11 @@ Route::prefix('v1')->group(function() {
             Route::put('update/{id}', [UserController::class, 'update'])->where('id', '[0-9]+');;
             Route::delete('delete/{id}', [UserController::class, 'destroy'])->where('id', '[0-9]+');;
             
-            Route::middleware(['active', 'auth:sanctum'])->group(function(){
-                Route::delete('log-out', [AccessController::class, 'logOut']);
-            });
         });
         
+        Route::middleware(['active', 'auth:sanctum'])->group(function(){
+            Route::delete('log-out', [AccessController::class, 'logOut']);
+        });
     });
     
     Route::prefix('roles')->middleware(['auth:sanctum', 'role:a'])->group(function(){
