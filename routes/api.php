@@ -72,6 +72,7 @@ Route::prefix('v1')->group(function() {
         Route::middleware('role:a')->group(function(){
             Route::get('all', [RefactionsController::class, 'readAllRefactions']);
             Route::post('create', [RefactionsController::class, 'createRefaction']);
+            Route::get('by/{id}', [RefactionsController::class, 'readRefactionById'])->where('id', '[0-9]+');
             Route::post('update/{id}', [RefactionsController::class, 'editRefaction'])->where('id', '[0-9]+');
             Route::put('taking/{id}', [RefactionsController::class, 'takingRefaction'])->where('id', '[0-9]+');
             Route::put('replenishment/{id}', [RefactionsController::class, 'replenishmentRefaction'])->where('id', '[0-9]+');

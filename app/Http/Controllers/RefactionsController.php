@@ -59,6 +59,21 @@ class RefactionsController extends Controller
         }
     }
 
+    public function readRefactionById(int $id){
+        try{
+            $refaction = Refaction::with(['type', 'location.level'])->find($id);
+
+            if (!$refaction)
+                return response()->json(['message'=>'Not found'], 404);
+                
+            $refaction->image_url = url('images/' . $refaction->image);
+            return response()->json(['message' => 'success', 'data' => $refaction], 200, [], JSON_UNESCAPED_SLASHES);
+        }catch(Exception $e){
+            if($e)
+                $this->messageError('readAllRefactions Function');
+        }
+    }
+
     public function createRefaction(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:refactions,name',
