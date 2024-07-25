@@ -158,9 +158,8 @@ class RefactionsController extends Controller
             $fieldsToUpdate = ['name', 'description', 'total_quantity', 'unit_price', 'type_id', 'location_id'];
     
             foreach ($fieldsToUpdate as $field) {
-                if ($request->has($field)) {
+                if ($request->has($field))
                     $refaction->$field = $request->$field;
-                }
             }
     
             if ($request->hasFile('image')) {

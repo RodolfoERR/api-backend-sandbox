@@ -22,4 +22,8 @@ class Refaction extends Model
     public function location(): BelongsTo{
         return $this->belongsTo(Shelf::class);
     }
+
+    public function registerDetails(): BelongsTo{
+        return $this->belongsTo(Register_Detail::class);
+    }
 }
