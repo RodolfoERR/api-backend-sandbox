@@ -80,7 +80,15 @@ Route::prefix('v1')->group(function() {
         });
     });
 
-    Route::prefix('reports')->middleware(['auth:sanctum', 'role:a'])->group(function() {
+    Route::prefix('reports')->middleware(['auth:sanctum'])->group(function() {
+        Route::middleware('role:a')->group(function(){
+            Route::get('all', [RegistersController::class, 'allReports']);
+            Route::put('update/{id}', [RegistersController::class, 'editReport'])->where('id', '[0-9]+');
+            Route::get('by-id/{id}', [RegistersController::class, 'byIdReports'])->where('id', '[0-9]+');
+        });
+
+        Route::get('by-user', [RegistersController::class, 'byUserReports']);
         Route::post('create', [RegistersController::class, 'createReport']);
+        Route::get('by-user/{id}', [RegistersController::class, 'byIDUserReports'])->where('id', '[0-9]+');
     });
 });

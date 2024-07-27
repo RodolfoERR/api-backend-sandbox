@@ -17,6 +17,9 @@ return new class extends Migration
             $table->unsignedInteger('quantity')
                 ->nullable(false);
 
+            $table->decimal('total')
+                ->nullable(false);
+
             $table->foreignId('register_id')
                 ->constrained('registers', 'id');
             $table->foreignId('refaction_id')
