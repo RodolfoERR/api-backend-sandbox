@@ -44,5 +44,9 @@ Route::prefix('views')->group(function(){
         return view('locations');
     })->name('locations');
 
+    Route::get('refacciones', function () {
+        return view('refacciones');
+    })->name('refacciones');
+
     /*Líneas temporales para borrar.*/
 });
