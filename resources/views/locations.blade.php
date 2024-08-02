@@ -399,7 +399,7 @@
 
         $('#logoutButton').click(function() {
             localStorage.removeItem('auth_token');
-            window.location.href = '{{ url("/views/loginweb") }}';
+            window.location.href = '{{ url("/views/login") }}';
         });
     </script>
 </body>
