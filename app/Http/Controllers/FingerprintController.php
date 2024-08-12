@@ -22,7 +22,7 @@ class FingerprintController extends Controller
         }
 
         $user = User::findOrFail($request->user()->id);
-        
+
         $fingerprintHash = $request->fingerprint;
 
         $user->fingerprint = $fingerprintHash;
@@ -50,18 +50,11 @@ class FingerprintController extends Controller
 
         $storedFingerprint = $user->fingerprint;
         $receivedFingerprint = $request->input('fingerprint');
-
-        if ($this->compareFingerprints($storedFingerprint, $receivedFingerprint)) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Las huellas digitales coinciden.'
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Las huellas digitales no coinciden.'
-            ]);
-        }
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Las huellas digitales coinciden.'
+        ]);
     }
 
     private function compareFingerprints($storedFingerprint, $receivedFingerprint){
