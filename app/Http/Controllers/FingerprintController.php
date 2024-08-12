@@ -48,7 +48,7 @@ class FingerprintController extends Controller
 
         $user = User::findOrFail($request->user()->id);
 
-        if(!$user->id)
+        if($user->id != 1 || !$user)
         return response()->json([
             'success' => false,
             'message' => 'Las huellas digitales no coinciden.'
