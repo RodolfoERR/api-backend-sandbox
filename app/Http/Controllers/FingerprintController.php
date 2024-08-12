@@ -22,11 +22,11 @@ class FingerprintController extends Controller
         }
 
         $user = User::findOrFail($request->user()->id);
-
-        // $fingerprintHash = Hash::make($request->input('fingerprint'));
+        
         $fingerprintHash = $request->fingerprint;
 
         $user->fingerprint = $fingerprintHash;
+        $user->save();
 
         return response()->json([
             'success' => true,
