@@ -11,7 +11,7 @@ class ShelvesController extends Controller
 {
     public function getShelves(){
         try{
-            $locations = Shelf::with('level')->get();
+            $locations = Shelf::with(['level', 'rack'])->get();
             return response()->json(['message' => 'success', 'data' => $locations], 202);
         }catch(Exception $e){
             if($e){
@@ -22,7 +22,7 @@ class ShelvesController extends Controller
 
     public function getByID(int $id){
         try{
-            $location = Shelf::with('level')->findOrFail($id);
+            $location = Shelf::with(['level', 'rack'])->findOrFail($id);
 
             if(!$location)
                 return response()->json(['message'=>'Not found'], 404);
@@ -36,8 +36,9 @@ class ShelvesController extends Controller
 
     public function createLocation(Request $request){
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:shelves',
-            'level_id' => 'required|exists:levels,id'
+            'name' => 'required',
+            'level_id' => 'required|exists:levels,id',
+            'rack_id' => 'required|exists:racks,id'
         ], [
             'name' => [
                 'required' => 'Necesitamos el nombre de la ubicacion',
@@ -45,6 +46,10 @@ class ShelvesController extends Controller
             ],
             'level_id' => [
                 'required' => 'Necesitamos el id del nivel almacenado',
+                'exists'  => 'Debe ser existente la id'
+            ],
+            'rack_id' => [
+                'required' => 'Necesitamos el id de la torre',
                 'exists'  => 'Debe ser existente la id'
             ]
         ]);
@@ -56,6 +61,7 @@ class ShelvesController extends Controller
             $shelf = new Shelf();
             $shelf->name = $request->name;
             $shelf->level_id = $request->level_id;
+            $shelf->rack_id = $request->rack_id;
             $shelf->save();
 
             return response()->json(['message' => 'success...', 'data' => $shelf], 202);
@@ -65,23 +71,35 @@ class ShelvesController extends Controller
         }
     }
 
-    public function updateLocation(Request $request, int $id){
-        try{
-            $location = Shelf::findOrFail($id);
-            
-            if(!$location)
-                return response()->json(['message' => 'Not found'], 404);
+    public function updateLocation(Request $request, $id){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'level_id' => 'required|exists:levels,id',
+            'rack_id' => 'required|exists:racks,id'
+        ], [
+            'name.required' => 'Necesitamos el nombre de la ubicacion',
+            'name.unique' => 'No puede haber dos ubicaciones nombradas igual',
+            'level_id.required' => 'Necesitamos el id del nivel almacenado',
+            'level_id.exists' => 'Debe ser existente la id',
+            'rack_id.required' => 'Necesitamos el id de la torre',
+            'rack_id.exists' => 'Debe ser existente la id'
+        ]);
 
-            $location->name = $request->name?? $location->name;
-            $location->level_id = $request->level_id?? $location->level_id;
+        if ($validator->fails()) {
+            return response()->json(['error' => 'Datos no aceptados', 'errors' => $validator->errors()], 400);
+        }
 
-            $location->save();
-            
-            return response()->json(['message' => 'success...', 'data' => $location], 202);
-        }catch(Exception $e){
-            if($e)
-                $this->messageError('createLocation Function');
-        }  
+        try {
+            $shelf = Shelf::findOrFail($id);
+            $shelf->name = $request->name;
+            $shelf->level_id = $request->level_id;
+            $shelf->rack_id = $request->rack_id;
+            $shelf->save();
+
+            return response()->json(['message' => 'Ubicación actualizada con éxito', 'data' => $shelf], 202);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Error al actualizar la ubicación', 'message' => $e->getMessage()], 500);
+        }
     }
 
     public function removeLocation(int $id){

@@ -11,22 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shelves', function(Blueprint $table){
+        Schema::create('racks', function(Blueprint $table){
             $table->id();
-            
-            $table->string('name', 10)
-                ->nullable(false)
-                ->unique();
+
+            $table->string('name', 6)
+                ->nullable(false);
             $table->boolean('active')
                 ->default(true);
-
-            $table->foreignId('level_id')
-                ->constrained('levels')
-                ->references('id');
-            
-            $table->foreignId('rack_id')
-                ->constrained('racks')
-                ->references('id');
 
             $table->timestamps();
         });

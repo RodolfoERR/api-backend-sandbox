@@ -19,6 +19,10 @@ class Shelf extends Model
         return $this->belongsTo(Level::class);
     }
 
+    public function rack(): BelongsTo{
+        return $this->belongsTo(Rack::class);
+    }
+
     public function refaction(): HasMany{
         return $this->hasMany(Refaction::class);
     }

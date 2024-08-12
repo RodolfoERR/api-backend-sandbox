@@ -181,3 +181,5 @@ cython_debug/
 #.idea/
 database/seeders/DatabaseSeeder.php
 public
+
+database\seeders\DatabaseSeeder.php
