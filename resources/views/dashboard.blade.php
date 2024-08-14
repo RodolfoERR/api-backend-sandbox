@@ -119,8 +119,18 @@
         }
 
         .carousel-image-container img {
-            max-width: 100%;
+            max-width: 80%;
+            max-height: 80%;
             height: auto;
+            width: 75%;
+        }
+
+        .centered-text {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
         }
     </style>
 </head>
@@ -183,11 +193,15 @@
     </nav>
 
     <div class="main-content">
-        <h2>Bienvenido a Engine Power Components</h2>
-        <p>
-        En Engine Power Components, podemos proporcionarle árboles de levas y ejes de equilibrio fabricados según sus especificaciones. Ofrecemos prácticamente todo tipo de materiales para aplicaciones de árboles de levas, incluido hierro fundido, hierro dúctil, hierro gris enfriado, hierro dúctil enfriado, forjado, palanquilla de acero y árboles de levas ensamblados.
-        También podemos proporcionarle kits que incluyen taqués, seguidores de rodillos, engranajes, pasadores, etc. Nos abastecemos a nivel mundial para poder satisfacer sus necesidades.
-        </p>
+        <div class="centered-text">
+            <h2>Bienvenido a Engine Power Components</h2>
+        </div>
+        <div class="centered-text">
+            <p style="text-align: justify; width:70%;">
+                En Engine Power Components, podemos proporcionarle árboles de levas y ejes de equilibrio fabricados según sus especificaciones. Ofrecemos prácticamente todo tipo de materiales para aplicaciones de árboles de levas, incluido hierro fundido, hierro dúctil, hierro gris enfriado, hierro dúctil enfriado, forjado, palanquilla de acero y árboles de levas ensamblados.
+                También podemos proporcionarle kits que incluyen taqués, seguidores de rodillos, engranajes, pasadores, etc. Nos abastecemos a nivel mundial para poder satisfacer sus necesidades.
+            </p>
+        </div>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -199,27 +213,15 @@
                     <div class="carousel-image-container">
                         <img src="https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/06/11060726/Car-Engines-Parts-Types-Working-More-Cover-110620211103.jpg" class="d-block" alt="Slide 1">
                     </div>
-                    <div class="carousel-caption d-none d-md-block">
-                        <!--<h5>Slide 1</h5>
-                        <p>Descripción del primer slide.</p>-->
-                    </div>
                 </div>
                 <div class="carousel-item">
                     <div class="carousel-image-container">
                         <img src="https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2023/03/17063507/car-cylinder-failure-_-Cover-17-3-23.jpg" class="d-block" alt="Slide 2">
                     </div>
-                    <div class="carousel-caption d-none d-md-block">
-                        <!--<h5>Slide 2</h5>
-                        <p>Descripción del segundo slide.</p>-->
-                    </div>
                 </div>
                 <div class="carousel-item">
                     <div class="carousel-image-container">
                         <img src="https://s41167.pcdn.co/wp-content/uploads/2018/08/Crankshaft-1122x617.jpg" class="d-block" alt="Slide 3">
-                    </div>
-                    <div class="carousel-caption d-none d-md-block">
-                        <!--<h5>Slide 3</h5>
-                        <p>Descripción del tercer slide.</p>-->
                     </div>
                 </div>
             </div>
