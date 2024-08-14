@@ -212,6 +212,13 @@
                         <hr>
                     </a>
                 </li>
+                <li>
+                    <a class="nav-link active" href="racks">
+                        
+                        Racks
+                        <hr>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
