@@ -63,5 +63,9 @@ Route::prefix('views')->group(function(){
         return view('refacciones');
     })->name('refacciones');
 
+    Route::get('racks', function () {
+        return view('racks');
+    })->name('racks');
+
     /*Líneas temporales para borrar.*/
 });

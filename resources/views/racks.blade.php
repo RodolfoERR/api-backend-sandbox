@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicaciones</title>
+    <title>Racks</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -154,7 +154,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="dashboard">
-            Control de almacén
+            Control de Almacén
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -165,6 +165,12 @@
                 <input type="search" placeholder="Buscar">-->
             </div>
             <ul class="navbar-nav">
+                <!--<li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-comments"></i></a>
+                </li>-->
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="logoutButton">Cerrar Sesión</a>
                 </li>
@@ -182,35 +188,30 @@
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link active" href="userscrud">
-                        <!--<i class="fas fa-user"></i>-->
                         Usuarios
                         <hr>
                     </a>
                 </li>
                 <li>
-                <a class="nav-link active" href="refacciones">
-               
+                    <a class="nav-link active" href="refacciones">
                         Refacciones
                         <hr>
                     </a>
                 </li>
                 <li>
-                <a class="nav-link active" href="types">
-                        
+                    <a class="nav-link active" href="types">
                         Tipos
                         <hr>
                     </a>
                 </li>
                 <li>
-                <a class="nav-link active" href="locations">
-                        
+                    <a class="nav-link active" href="locations">
                         Ubicaciones
                         <hr>
                     </a>
                 </li>
                 <li>
                     <a class="nav-link active" href="racks">
-                        
                         Racks
                         <hr>
                     </a>
@@ -220,65 +221,39 @@
     </nav>
 
     <div class="main-content">
-        <h1>Ubicaciones</h1>
-        <button class="btn btn-success mb-3" data-toggle="modal" data-target="#locationModal" onclick="openModal('add')">Agregar Ubicación</button>
+        <h1>Racks</h1>
+        <button class="btn btn-success mb-3" data-toggle="modal" data-target="#rackModal" onclick="openModal('add')">Agregar Rack</button>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre</th>
-                    <th>Nivel</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="locationTableBody">
-                <!-- Los datos de las ubicaciones se cargarán aquí -->
+            <tbody id="rackTableBody">
+                <!-- Los datos de los racks se cargarán aquí -->
             </tbody>
         </table>
     </div>
 
-    <div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" aria-hidden="true">
+    <!-- Modal para agregar/modificar racks -->
+    <div class="modal fade" id="rackModal" tabindex="-1" role="dialog" aria-labelledby="rackModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="locationModalLabel">Agregar/Modificar Ubicación</h5>
+                    <h5 class="modal-title" id="rackModalLabel">Agregar/Modificar Rack</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="locationForm">
+                    <form id="rackForm">
                         @csrf
-                        <input type="hidden" id="locationId">
+                        <input type="hidden" id="rackId">
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
-                        <div class="form-group">
-                            <label for="level">Nivel</label>
-                            <select class="form-control" id="level_id" name="level_id" required>
-                                <option selected>Selecciona opción</option>
-                                <option value="1">lvl1</option>
-                                <option value="2">lvl2</option>
-                                <option value="3">lvl3</option>
-                                <option value="4">lvl4</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="rack_id">Rack</label>
-                            <select class="form-control" id="rack_id" name="rack_id" required>
-                                <option selected>Selecciona un rack</option>
-                                <!-- Los racks se cargarán aquí -->
-                            </select>
-                        </div>
-
-                        <!--<div class="form-group">
-                            <label for="active">Activo</label>
-                            <select class="form-control" id="active" name="active" required>
-                                <option value="1">Sí</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>-->
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
                 </div>
@@ -287,12 +262,11 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
             var authToken = localStorage.getItem('auth_token');
-
             if (!authToken) {
                 window.location.href = '{{ url("/views/login") }}';
             } else {
@@ -311,91 +285,74 @@
                     }
                 });
 
-                // Configure default headers for all AJAX requests
                 $.ajaxSetup({
                     headers: {
                         'Authorization': 'Bearer ' + authToken
                     }
                 });
 
-                fetchLocations();
                 fetchRacks();
             }
         });
 
-        function fetchLocations() {
-            $.get('{{ url("/api/v1/locations/all-locations") }}', function(data) {
-                let locationTableBody = $('#locationTableBody');
-                locationTableBody.empty();
-                data.data.forEach(location => {
-                    let locationRow = `
-                        <tr>
-                            <td>${location.id}</td>
-                            <td>${location.name}</td>
-                            <td>${location.level.name}</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="openModal('edit', ${location.id})">Editar</button>
-                                <button class="btn btn-danger" onclick="deleteLocation(${location.id})">Eliminar</button>
-                            </td>
-                        </tr>
-                    `;
-                    locationTableBody.append(locationRow);
-                });
-            });
-        }
         function fetchRacks() {
             $.get('{{ url("/api/v1/racks/all") }}', function(data) {
-                let rackSelect = $('#rack_id');
-                rackSelect.empty();
+                let rackTableBody = $('#rackTableBody');
+                rackTableBody.empty();
                 data.data.forEach(rack => {
-                    let rackOption = `<option value="${rack.id}">${rack.name}</option>`;
-                    rackSelect.append(rackOption);
+                    if (rack.active === 1) { // Filtrar solo los racks activos
+                        let rackRow = `
+                            <tr>
+                                <td>${rack.name}</td>
+                                <td>
+                                    <button class="btn btn-warning" onclick="openModal('edit', ${rack.id})">Editar</button>
+                                    <button class="btn btn-danger" onclick="deleteRack(${rack.id})">Eliminar</button>
+                                </td>
+                            </tr>
+                        `;
+                        rackTableBody.append(rackRow);
+                    }
                 });
             });
         }
 
 
         function openModal(mode, id) {
-            $('#locationForm')[0].reset();
+            $('#rackForm')[0].reset();
 
             if (mode === 'edit' && id) {
                 $.ajax({
-                    url: '/api/v1/locations/by/' + id,
+                    url: '/api/v1/racks/by/' + id,
                     method: 'GET',
                     success: function(response) {
-                        let location = response.data;
-                        $('#locationId').val(location.id);
-                        $('#name').val(location.name);
-                        $('#level_id').val(location.level.id); // Asegúrate de usar location.level.id si así se llama en la respuesta del servidor
-                        $('#rack_id').val(location.rack_id);
-                        console.log("El id es "+location.id);
+                        let rack = response.data;
+                        $('#rackId').val(rack.id);
+                        $('#name').val(rack.name);
                     },
                     error: function(xhr, status, error) {
-                        var errorMsg = xhr.responseJSON.message || 'Error al cargar los datos de la ubicación.';
+                        var errorMsg = xhr.responseJSON.message || 'Error al cargar los datos del rack.';
                         alert(errorMsg);
                     }
                 });
             }
 
-            $('#locationModalLabel').text(mode === 'edit' ? 'Editar Ubicación' : 'Agregar Ubicación');
-            $('#locationModal').modal('show');
+            $('#rackModalLabel').text(mode === 'edit' ? 'Editar Rack' : 'Agregar Rack');
+            $('#rackModal').modal('show');
         }
 
-
-        $('#locationForm').on('submit', function(event) {
+        $('#rackForm').on('submit', function(event) {
             event.preventDefault();
 
-            var locationId = $('#locationId').val();
-            var url = locationId ? '{{ url("/api/v1/locations/update") }}/' + locationId : '{{ url("/api/v1/locations/create") }}';
-            var method = locationId ? 'PUT' : 'POST';
+            var rackId = $('#rackId').val();
+            var url = rackId ? '{{ url("/api/v1/racks/update") }}/' + rackId : '{{ url("/api/v1/racks/create") }}';
+            var method = rackId ? 'PUT' : 'POST';
 
             $.ajax({
                 url: url,
                 method: method,
                 data: $(this).serialize(),
                 success: function(response) {
-                    $('#locationModal').modal('hide');
-                    fetchLocations();
+                    $('#rackModal').modal('hide');
                     fetchRacks();
                 },
                 error: function(xhr) {
@@ -404,21 +361,21 @@
             });
         });
 
-        function deleteLocation(id) {
-            if (confirm('¿Estás seguro de que deseas eliminar esta ubicación?')) {
+        function deleteRack(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este rack?')) {
                 $.ajax({
-                    url: '{{ url("/api/v1/locations/delete") }}/' + id,
+                    url: '{{ url("/api/v1/racks/delete") }}/' + id,
                     method: 'DELETE',
                     success: function(response) {
-                        fetchLocations();
                         fetchRacks();
                     },
                     error: function(xhr) {
-                        alert('Error: ' + xhr.responseText);
+                        alert('Error al eliminar el rack: ' + xhr.responseText);
                     }
                 });
             }
         }
+
 
         $('#logoutButton').click(function() {
             localStorage.removeItem('auth_token');
