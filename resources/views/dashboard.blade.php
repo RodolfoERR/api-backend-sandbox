@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,56 +10,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         .card-header {
-            background-color: #007EE5; /* Azul de Dropbox */
+            background-color: #007EE5;
             color: white;
         }
+
         .sidebar {
             height: 100vh;
-            background-color: #3D3D3D; /* Gris oscuro de Dropbox */
+            background-color: #3D3D3D;
             color: white;
             position: fixed;
-            top: 56px; /* Altura de la barra de navegación */
+            top: 56px;
             left: 0;
             padding-top: 20px;
             width: 250px;
             overflow-y: auto;
         }
+
         .main-content {
             margin-left: 250px;
             padding: 20px;
-            background-color: #F4F4F4; /* Gris claro de Dropbox */
-            margin-top: 56px; /* Altura de la barra de navegación */
+            background-color: #F4F4F4;
+            margin-top: 56px;
         }
+
         .navbar {
-            background-color: #007EE5; /* Azul de Dropbox */
+            background-color: #007EE5;
             z-index: 1000;
             position: fixed;
             width: 100%;
             top: 0;
         }
-        .navbar-brand, .nav-link {
+
+        .navbar-brand,
+        .nav-link {
             color: white !important;
         }
+
         .navbar-brand {
             font-weight: bold;
             font-size: 1.2em;
         }
+
         .navbar-brand img {
             height: 30px;
             margin-right: 10px;
         }
+
         .nav-link {
             margin-right: 20px;
         }
+
         .sidebar .nav-link {
             color: white !important;
         }
+
         .content-wrapper {
-            margin-top: 56px; /* Altura de la barra de navegación */
+            margin-top: 56px;
         }
+
         .search-bar {
             position: relative;
         }
+
         .search-bar input {
             width: 250px;
             padding: 10px 20px;
@@ -66,8 +79,9 @@
             border: none;
             outline: none;
             padding-left: 40px;
-            background-color: #FFFFFF; /* Blanco */
+            background-color: #FFFFFF;
         }
+
         .search-bar i {
             position: absolute;
             left: 15px;
@@ -75,66 +89,73 @@
             transform: translateY(-50%);
             color: gray;
         }
+
         .profile-section {
             text-align: center;
             padding-bottom: 20px;
         }
+
         .profile-section img {
             height: 60px;
             border-radius: 50%;
         }
+
         .profile-section h4 {
             margin-top: 10px;
             color: white;
         }
+
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #FFFFFF;
             color: #3D464D;
         }
+
+        .carousel-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .carousel-image-container img {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
+
 <body>
     <!-- Barra lateral -->
     <nav class="col-md-2 d-none d-md-block sidebar">
         <div class="sidebar">
             <div class="profile-section">
-                <img src="https://www.movilzona.es/app/uploads-movilzona.es/2023/04/fto-perfil.jpg?x=480&y=375&quality=40" alt="Profile"> <!-- Ajusta el path de la imagen de perfil -->
+                <img src="https://www.movilzona.es/app/uploads-movilzona.es/2023/04/fto-perfil.jpg?x=480&y=375&quality=40" alt="Profile">
                 <h4>Admin</h4>
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="userscrud">
-                        <!--<i class="fas fa-user"></i>-->
-                        Usuarios
+                    <a class="nav-link active" href="userscrud">Usuarios
                         <hr>
                     </a>
                 </li>
                 <li>
-                <a class="nav-link active" href="refacciones">
-               
-                        Refacciones
+                    <a class="nav-link active" href="refacciones">Refacciones
                         <hr>
                     </a>
                 </li>
                 <li>
-                <a class="nav-link active" href="types">
-                        
-                        Tipos
+                    <a class="nav-link active" href="types">Tipos
                         <hr>
                     </a>
                 </li>
                 <li>
-                <a class="nav-link active" href="locations">
-                        
-                        Ubicaciones
+                    <a class="nav-link active" href="locations">Ubicaciones
                         <hr>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="racks">
-                        
-                        Racks
+                    <a class="nav-link active" href="racks">Racks
                         <hr>
                     </a>
                 </li>
@@ -152,8 +173,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="search-bar ml-auto">
-                <!--<i class="fas fa-search"></i>
-                <input type="search" placeholder="Buscar">-->
             </div>
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -163,7 +182,57 @@
         </div>
     </nav>
 
-    
+    <div class="main-content">
+        <h2>Bienvenido a Engine Power Components</h2>
+        <p>
+        En Engine Power Components, podemos proporcionarle árboles de levas y ejes de equilibrio fabricados según sus especificaciones. Ofrecemos prácticamente todo tipo de materiales para aplicaciones de árboles de levas, incluido hierro fundido, hierro dúctil, hierro gris enfriado, hierro dúctil enfriado, forjado, palanquilla de acero y árboles de levas ensamblados.
+        También podemos proporcionarle kits que incluyen taqués, seguidores de rodillos, engranajes, pasadores, etc. Nos abastecemos a nivel mundial para poder satisfacer sus necesidades.
+        </p>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="carousel-image-container">
+                        <img src="https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/06/11060726/Car-Engines-Parts-Types-Working-More-Cover-110620211103.jpg" class="d-block" alt="Slide 1">
+                    </div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <!--<h5>Slide 1</h5>
+                        <p>Descripción del primer slide.</p>-->
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image-container">
+                        <img src="https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2023/03/17063507/car-cylinder-failure-_-Cover-17-3-23.jpg" class="d-block" alt="Slide 2">
+                    </div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <!--<h5>Slide 2</h5>
+                        <p>Descripción del segundo slide.</p>-->
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image-container">
+                        <img src="https://s41167.pcdn.co/wp-content/uploads/2018/08/Crankshaft-1122x617.jpg" class="d-block" alt="Slide 3">
+                    </div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <!--<h5>Slide 3</h5>
+                        <p>Descripción del tercer slide.</p>-->
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Siguiente</span>
+            </a>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -172,7 +241,7 @@
         $(document).ready(function() {
             $('#logoutButton').click(function(e) {
                 e.preventDefault();
-                
+
                 $.ajax({
                     url: '{{ url("/api/v1/users/log-out") }}',
                     method: 'DELETE',
@@ -189,35 +258,30 @@
                 });
             });
         });
-    </script>
-    <script>
-        $(document).ready(function() {
-        // Verificar si hay un token en localStorage
-        var authToken = localStorage.getItem('auth_token');
 
-        if (!authToken) {
-            // Redirigir al login si no hay token
-            window.location.href = '{{ url("/views/login") }}';
-        } else {
-            // Opcional: Verificar el token con una solicitud al servidor para asegurarse de que es válido
-            $.ajax({
-                url: '{{ url("/api/v1/users/get-Myself") }}', // Ruta para obtener información del usuario autenticado
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + authToken
-                },
-                success: function(response) {
-                    // Token válido, el usuario puede permanecer en la página
-                    console.log('Usuario autenticado:', response);
-                },
-                error: function(xhr, status, error) {
-                    // Token no válido, redirigir al login
-                    localStorage.removeItem('auth_token');
-                    window.location.href = '{{ url("/views/loginweb") }}';
-                }
-            });
-        }
-    });
+        $(document).ready(function() {
+            var authToken = localStorage.getItem('auth_token');
+
+            if (!authToken) {
+                window.location.href = '{{ url("/views/login") }}';
+            } else {
+                $.ajax({
+                    url: '{{ url("/api/v1/users/get-Myself") }}',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + authToken
+                    },
+                    success: function(response) {
+                        console.log('Usuario autenticado:', response);
+                    },
+                    error: function(xhr, status, error) {
+                        localStorage.removeItem('auth_token');
+                        window.location.href = '{{ url("/views/loginweb") }}';
+                    }
+                });
+            }
+        });
     </script>
 </body>
+
 </html>
