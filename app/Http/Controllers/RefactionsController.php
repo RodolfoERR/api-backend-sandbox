@@ -47,9 +47,11 @@ class RefactionsController extends Controller
                 'updated_at'
             ];
 
-            foreach ($refactions as $refaction){
+            foreach ($refactions as $refaction) {
                 $refaction->setHidden($hiddenRefaction);
-                $refaction->type->setHidden($hiddenType);
+                if ($refaction->type) {
+                    $refaction->type->setHidden($hiddenType);
+                }
             }
 
             return response()->json(['message' => 'success', 'data' => $refactions], 200, [], JSON_UNESCAPED_SLASHES);
