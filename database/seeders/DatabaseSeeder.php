@@ -45,11 +45,10 @@ class DatabaseSeeder extends Seeder
         $user->f_name = 'Admin';
         $user->l_name = 'Inventory';
         $user->phone = 0000000000;
-        $user->email = 'coriaedd@gmail.com';
-        $user->password = Hash::make('kobeni');
+        $user->email = 'mikecervantes2024@gmail.com';
+        $user->password = Hash::make('admin2024');
         $user->active = true;
         $user->role_id = 1;
-
         $user->save();
 
         /* Levels */
