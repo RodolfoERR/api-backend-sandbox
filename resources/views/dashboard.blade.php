@@ -131,6 +131,13 @@
                         <hr>
                     </a>
                 </li>
+                <li>
+                    <a class="nav-link active" href="racks">
+                        
+                        Racks
+                        <hr>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -145,16 +152,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="search-bar ml-auto">
-                <i class="fas fa-search"></i>
-                <input type="search" placeholder="Buscar">
+                <!--<i class="fas fa-search"></i>
+                <input type="search" placeholder="Buscar">-->
             </div>
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-comments"></i></a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="logoutButton">Cerrar Sesión</a>
                 </li>
