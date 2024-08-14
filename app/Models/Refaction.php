@@ -12,7 +12,6 @@ class Refaction extends Model
 
     protected $hidden = [
         'type_id',
-        'location_id'
     ];
 
     public function type(): BelongsTo{
