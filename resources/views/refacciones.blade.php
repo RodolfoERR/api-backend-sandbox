@@ -358,7 +358,7 @@
                     <td>${refaction.unit_price}</td>
                     <td>${refaction.type.name}</td>
                     <td>${refaction.location.name}</td>
-                    <td><img src="${refaction.image_url}" alt="Imagen de la refacción" width="50"></td>
+                    <td><img src="${refaction.image}" alt="Imagen de la refacción" width="50"></td>
                     <td>
                     <button class="btn btn-warning" onclick="openModal('edit', ${refaction.id})">Editar</button>
                     <button class="btn btn-danger" onclick="deleteRefaction(${refaction.id})">Eliminar</button>
