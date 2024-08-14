@@ -225,7 +225,6 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Nivel</th>
                     <th>Acciones</th>
@@ -330,7 +329,6 @@
                 data.data.forEach(location => {
                     let locationRow = `
                         <tr>
-                            <td>${location.id}</td>
                             <td>${location.name}</td>
                             <td>${location.level.name}</td>
                             <td>
