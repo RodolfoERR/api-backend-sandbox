@@ -162,16 +162,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="search-bar ml-auto">
-                <i class="fas fa-search"></i>
-                <input type="search" placeholder="Buscar">
+                <!--<i class="fas fa-search"></i>
+                <input type="search" placeholder="Buscar">-->
             </div>
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-comments"></i></a>
-                </li>
+                </li>-->
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="logoutButton">Cerrar Sesión</a>
                 </li>
@@ -189,7 +189,7 @@
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link active" href="userscrud">
-                        <i class="fas fa-user"></i>
+                        <!--<i class="fas fa-user"></i>-->
                         Usuarios
                         <hr>
                     </a>
@@ -265,11 +265,13 @@
                     </div>
                     <div class="form-group">
                         <label for="total_quantity">Cantidad Total</label>
-                        <input type="number" class="form-control" id="total_quantity" name="total_quantity" required>
+                        <input type="number" class="form-control" id="total_quantity" name="total_quantity" min="0" required>
                     </div>
                     <div class="form-group">
                         <label for="unit_price">Precio Unitario</label>
-                        <input type="number" class="form-control" id="unit_price" name="unit_price" required>
+                        <input type="number" class="form-control" id="unit_price" name="unit_price" min="0" required>
+                        <span id="display-value"></span>
+                        <span id="error-message" style="color: red; display: none;"></span>
                     </div>
                     <div class="form-group">
                         <label for="type_id">Tipo</label>
@@ -469,6 +471,28 @@
                 });
             });
         }
+
+        const cantidadInput = document.getElementById("unit_price");
+        const errorMessage = document.getElementById("error-message");
+        const displayValue = document.getElementById("display-value"); // Add a new element to display the formatted value
+
+        cantidadInput.addEventListener("input", function() {
+        let valor = parseFloat(this.value.replace(/[$,]/g, '')); // Remove any non-numeric characters
+
+        if (valor < 0) {
+            errorMessage.textContent = "Solo se permiten valores mayores a 0.";
+            valor = 1; // Si el valor es negativo, se establece en 0
+            errorMessage.style.display = "block"; // Mostrar el mensaje de error
+        } else {
+            errorMessage.textContent = ""; // Limpiar el mensaje de error
+            errorMessage.style.display = "none"; // Ocultar el mensaje de error
+        }
+
+        // Formato de moneda
+        const formattedValue = valor.toLocaleString('en-US', { style: 'currency', currency: 'MXN' });
+        displayValue.textContent = formattedValue; // Update the display element with the formatted string
+        });
+
         $('#logoutButton').click(function(e) {
                 e.preventDefault();
                 

@@ -133,16 +133,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="search-bar ml-auto">
-                <i class="fas fa-search"></i>
-                <input type="search" placeholder="Buscar">
+                <!--<i class="fas fa-search"></i>
+                <input type="search" placeholder="Buscar">-->
             </div>
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-comments"></i></a>
-                </li>
+                </li>-->
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="logoutButton">Cerrar Sesión</a>
                 </li>
@@ -160,7 +160,7 @@
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link active" href="userscrud">
-                        <i class="fas fa-user"></i>
+                        <!--<i class="fas fa-user"></i>-->
                         Usuarios
                         <hr>
                     </a>
