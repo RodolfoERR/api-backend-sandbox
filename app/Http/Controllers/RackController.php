@@ -19,21 +19,22 @@ class RackController extends Controller
         }
     }
 
-    public function store(Request $request){
-        $validator = Validator::make($request->validate([
-            'name' => 'required|string|max:6',
-        ],[
-            'name'=>[
-                'required'=>'Necesitamos el nombre de la torre',
-                'max'=>'Solo tienes 6 caracteres'
-            ]
-        ]));
+    public function storeRack(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+        ], [
+            'name.required' => 'necesitamos el nombre',
+            'name.string' => 'debe ser string',
+        ]);
 
         if($validator->fails())
             return response()->json(['error' => 'Datos no aceptados', 'errors' => $validator->errors()], 400);
 
         try{
-            Rack::create($request->all());
+            $rack = new Rack();
+            $rack->name = $request->name;
+            $rack->save();
+
             return response()->json(['message'=> 'sucess'], 201);
         }catch(Exception $e){
             if($e)

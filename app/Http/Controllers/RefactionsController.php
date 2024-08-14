@@ -12,7 +12,7 @@ class RefactionsController extends Controller
     public function readAllRefactions(){
         try{
             $refactions = Refaction::with(['type', 'location.level'])->get()->map(function ($refaction) {
-                $refaction->image_url = url('images/' . $refaction->image);
+                $refaction->image = url('images/' . $refaction->image);
                 return $refaction;
             });
 
@@ -26,7 +26,7 @@ class RefactionsController extends Controller
     public function readAllRefactionsMinus(){
         try{
             $refactions = Refaction::with('type')->get()->map(function ($refaction) {
-                $refaction->image_url = url('images/' . $refaction->image);
+                $refaction->imgae = url('images/' . $refaction->image);
                 return $refaction;
             });
 

@@ -54,7 +54,7 @@ Route::prefix('v1')->group(function() {
 
     Route::prefix('racks')->middleware(['auth:sanctum', 'role:a'])->group(function(){
         Route::get('all', [RackController::class, 'index']);
-        Route::post('create', [RackController::class, 'store']);
+        Route::post('create', [RackController::class, 'storeRack']);
         Route::put('update/{id}', [RackController::class, 'update'])->where('id', '[0-9]+');
         Route::delete('delete/{id}', [RackController::class, 'destroy'])->where('id', '[0-9]+');
     });
