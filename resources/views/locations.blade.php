@@ -265,12 +265,20 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="rack_id">Rack</label>
+                            <select class="form-control" id="rack_id" name="rack_id" required>
+                                <option selected>Selecciona un rack</option>
+                                <!-- Los racks se cargarán aquí -->
+                            </select>
+                        </div>
+
+                        <!--<div class="form-group">
                             <label for="active">Activo</label>
                             <select class="form-control" id="active" name="active" required>
                                 <option value="1">Sí</option>
                                 <option value="0">No</option>
                             </select>
-                        </div>
+                        </div>-->
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
                 </div>
@@ -311,6 +319,7 @@
                 });
 
                 fetchLocations();
+                fetchRacks();
             }
         });
 
@@ -334,6 +343,17 @@
                 });
             });
         }
+        function fetchRacks() {
+            $.get('{{ url("/api/v1/racks/all") }}', function(data) {
+                let rackSelect = $('#rack_id');
+                rackSelect.empty();
+                data.data.forEach(rack => {
+                    let rackOption = `<option value="${rack.id}">${rack.name}</option>`;
+                    rackSelect.append(rackOption);
+                });
+            });
+        }
+
 
         function openModal(mode, id) {
             $('#locationForm')[0].reset();
@@ -347,7 +367,7 @@
                         $('#locationId').val(location.id);
                         $('#name').val(location.name);
                         $('#level_id').val(location.level.id); // Asegúrate de usar location.level.id si así se llama en la respuesta del servidor
-                        $('#active').val(location.active);
+                        $('#rack_id').val(location.rack_id);
                         console.log("El id es "+location.id);
                     },
                     error: function(xhr, status, error) {
@@ -376,6 +396,7 @@
                 success: function(response) {
                     $('#locationModal').modal('hide');
                     fetchLocations();
+                    fetchRacks();
                 },
                 error: function(xhr) {
                     alert('Error al guardar: ' + xhr.responseText);
@@ -390,6 +411,7 @@
                     method: 'DELETE',
                     success: function(response) {
                         fetchLocations();
+                        fetchRacks();
                     },
                     error: function(xhr) {
                         alert('Error: ' + xhr.responseText);
