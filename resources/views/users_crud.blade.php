@@ -134,16 +134,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="search-bar ml-auto">
-                <i class="fas fa-search"></i>
-                <input type="search" placeholder="Buscar">
+                <!--<i class="fas fa-search"></i>
+                <input type="search" placeholder="Buscar">-->
             </div>
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-comments"></i></a>
-                </li>
+                </li>-->
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="logoutButton">Cerrar Sesión</a>
                 </li>
@@ -161,7 +161,7 @@
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link active" href="userscrud">
-                        <i class="fas fa-user"></i>
+                        <!--<i class="fas fa-user"></i>-->
                         Usuarios
                         <hr>
                     </a>
@@ -254,14 +254,18 @@
                             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                         </div>
                         <div class="form-group">
+                            <input type="hidden" class="form-control" id="active" name="active" value="1">
+                            <!--
                             <label for="active">Activo</label>
                             <select class="form-control" id="active" name="active">
                                 <option value="1">Sí</option>
                                 <option value="0">No</option>
-                            </select>
+                            </select>-->
                         </div>
                         <div class="form-group">
-                            <label for="code">Código</label>
+                            <!--Modificación para subir el 02/08/24-->
+                            <!--ELiminar campo de manera visual-->
+                            <!--<label for="code">Código</label>-->
                             <input type="hidden" class="form-control" id="code" name="code" value="000000">
                         </div>
                         <!--<div class="form-group">
@@ -270,10 +274,12 @@
                         </div>-->
 
                         <div class="form-group">
-                            <label for="role_id">Rol</label>
-                            <select class="form-control" id="role_id" name="role_id" required>
+                            <!--Rol-->
+                            <!--<label for="role_id">Rol</label>-->
+                            <input type="hidden" class="form-control" id="role_id" name="role_id" value="2" required>
+                            <!--<select type="hidden" class="form-control" id="role_id" name="role_id" required>
                                 <!-- Opciones de rol se cargarán dinámicamente -->
-                            </select>
+                            <!--</select>-->
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
@@ -344,16 +350,17 @@
             });
         }
 
-        function loadRoles() {
-            $.get('{{ url("/api/v1/roles/all-roles") }}', function(data) {
-                let roleSelect = $('#role_id');
-                roleSelect.empty();
-                data.forEach(role => {
-                    let roleOption = `<option value="${role.id}">${role.name}</option>`;
-                    roleSelect.append(roleOption);
-                });
-            });
-        }
+        //Ya no se cargarán los roles debido a que los usuarios que se vayan a crear, serán solamente usuarios normales, no admin's.
+        //function loadRoles() {
+        //    $.get('{{ url("/api/v1/roles/all-roles") }}', function(data) {
+        //        let roleSelect = $('#role_id');
+        //        roleSelect.empty();
+        //        data.forEach(role => {
+        //            let roleOption = `<option value="${role.id}">${role.name}</option>`;
+        //            roleSelect.append(roleOption);
+        //        });
+        //    });
+        //}
 
         function openModal(type, id = null) {
             $('#userForm')[0].reset();
