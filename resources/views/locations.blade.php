@@ -188,7 +188,7 @@
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link active" href="userscrud">
-                        <i class="fas fa-user"></i>
+                        <!--<i class="fas fa-user"></i>-->
                         Usuarios
                         <hr>
                     </a>
