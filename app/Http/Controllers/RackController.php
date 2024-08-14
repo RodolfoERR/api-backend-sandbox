@@ -19,6 +19,16 @@ class RackController extends Controller
         }
     }
 
+    public function show($id){
+        try {
+            $rack = Rack::findOrFail($id);
+
+            return response()->json(['message' => 'success', 'data' => $rack]);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Rack not found'], 404);
+        }
+    }
+
     public function storeRack(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',

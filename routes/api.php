@@ -57,6 +57,7 @@ Route::prefix('v1')->group(function() {
         Route::post('create', [RackController::class, 'storeRack']);
         Route::put('update/{id}', [RackController::class, 'update'])->where('id', '[0-9]+');
         Route::delete('delete/{id}', [RackController::class, 'destroy'])->where('id', '[0-9]+');
+        Route::get('by/{id}', [RackController::class, 'show']);
     });
 
     Route::prefix('locations')->middleware(['auth:sanctum', 'role:a'])->group(function(){
