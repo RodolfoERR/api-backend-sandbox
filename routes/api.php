@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\FingerprintController;
+use App\Http\Controllers\HiddenController;
 use App\Http\Controllers\RackController;
 use App\Http\Controllers\RefactionsController;
 use App\Http\Controllers\RegistersController;
@@ -76,7 +77,7 @@ Route::prefix('v1')->group(function() {
     });
 
     Route::prefix('refactions')->middleware(['auth:sanctum'])->group(function() {
-        Route::get('all-minus', [RefactionsController::class, 'readAllRefactionsMinus']);
+        Route::get('all-minus', [HiddenController::class, 'readAllRefactionsMinus']);
         Route::put('taking/{id}', [RefactionsController::class, 'takingRefaction'])->where('id', '[0-9]+');
         Route::get('all-locations', [ShelvesController::class, 'getShelves']);
         Route::get('by/{id}', [RefactionsController::class, 'readRefactionById'])->where('id', '[0-9]+');
