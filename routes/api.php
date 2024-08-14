@@ -1,15 +1,17 @@
 <?php
 
 use App\Http\Controllers\AccessController;
+use App\Http\Controllers\FingerprintController;
+use App\Http\Controllers\RackController;
 use App\Http\Controllers\RefactionsController;
 use App\Http\Controllers\RegistersController;
 use App\Http\Controllers\UsersController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShelvesController;
 use App\Http\Controllers\TypesController;
+use Illuminate\Http\Request;
 use App\Models\Refaction;
 
 /*
@@ -35,7 +37,6 @@ Route::prefix('v1')->group(function() {
             Route::get('show/{id}', [UserController::class, 'show'])->where('id', '[0-9]+');;
             Route::put('update/{id}', [UserController::class, 'update'])->where('id', '[0-9]+');;
             Route::delete('delete/{id}', [UserController::class, 'destroy'])->where('id', '[0-9]+');;
-            
         });
 
         Route::middleware(['active', 'auth:sanctum'])->group(function(){
@@ -49,6 +50,13 @@ Route::prefix('v1')->group(function() {
         Route::get('show/{id}', [RoleController::class, 'show'])->where('id', '[0-9]+');
         Route::put('update/{id}', [RoleController::class, 'update'])->where('id', '[0-9]+');
         Route::delete('delete/{id}', [RoleController::class, 'destroy'])->where('id', '[0-9]+');
+    });
+
+    Route::prefix('racks')->middleware(['auth:sanctum', 'role:a'])->group(function(){
+        Route::get('all', [RackController::class, 'index']);
+        Route::post('create', [RackController::class, 'store']);
+        Route::put('update/{id}', [RackController::class, 'update'])->where('id', '[0-9]+');
+        Route::delete('delete/{id}', [RackController::class, 'destroy'])->where('id', '[0-9]+');
     });
 
     Route::prefix('locations')->middleware(['auth:sanctum', 'role:a'])->group(function(){
@@ -90,5 +98,10 @@ Route::prefix('v1')->group(function() {
         Route::get('by-user', [RegistersController::class, 'byUserReports']);
         Route::post('create', [RegistersController::class, 'createReport']);
         Route::get('by-user/{id}', [RegistersController::class, 'byIDUserReports'])->where('id', '[0-9]+');
+    });
+
+    Route::prefix('digital')->middleware(['auth:sanctum', 'role:a'])->group(function() {
+        Route::post('save-digital-fingerprint', [FingerprintController::class, 'storeFingerprint']);
+        Route::post('check-digital-fingerprint', [FingerprintController::class, 'checkingFingerprint']);
     });
 });

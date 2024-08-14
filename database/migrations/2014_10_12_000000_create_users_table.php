@@ -25,7 +25,7 @@ return new class extends Migration
                 ->nulleable(false);
             $table->boolean('active')
                 ->default(false);
-            $table->string('fingerprint')
+            $table->longText('fingerprint')
                 ->nullable(true);
             $table->string('password')
                 ->nullable(false);
