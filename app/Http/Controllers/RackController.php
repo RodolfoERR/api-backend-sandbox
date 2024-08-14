@@ -43,14 +43,11 @@ class RackController extends Controller
     }
 
     public function update(Request $request, $id){
-        $validator = Validator::make($request->validate([
-            'name' => 'required|string|max:6',
-        ],[
-            'name'=>[
-                'required'=>'Necesitamos el nombre de la torre',
-                'max'=>'Solo tienes 6 caracteres'
-            ]
-        ]));
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+        ], [
+            'name.required' => 'Necesitamos el nombre de la torre',
+        ]);
 
         if($validator->fails())
         return response()->json(['error' => 'Datos no aceptados', 'errors' => $validator->errors()], 400);
@@ -60,7 +57,9 @@ class RackController extends Controller
             if(!$rack)
                 return response()->json(['message'=>'Not found'], 404); 
 
-            $rack->update($request->all());
+            $rack->name = $request->name;
+            $rack->save();
+
             return response()->json(["message"=>"success"]);
         }catch(Exception $e){
             if($e)
@@ -74,7 +73,9 @@ class RackController extends Controller
             if(!$rack)
                 return response()->json(['message'=>'Not found'], 404); 
 
-            $rack->update(['active' => false]);
+            $rack->active = false;
+            $rack->save();
+            
             return response()->json(null, 204);
         }catch(Exception $e){
             if($e)

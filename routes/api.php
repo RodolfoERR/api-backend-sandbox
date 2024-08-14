@@ -96,7 +96,7 @@ Route::prefix('v1')->group(function() {
         });
 
         Route::get('by-user', [RegistersController::class, 'byUserReports']);
-        Route::post('create', [RegistersController::class, 'createReport']);
+        Route::post('create', [RegistersController::class, 'createReport'])->name('cReport');
         Route::get('by-user/{id}', [RegistersController::class, 'byIDUserReports'])->where('id', '[0-9]+');
     });
 
