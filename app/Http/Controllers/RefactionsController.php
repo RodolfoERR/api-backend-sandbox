@@ -26,7 +26,7 @@ class RefactionsController extends Controller
     public function readAllRefactionsMinus(){
         try{
             $refactions = Refaction::with('type')->get()->map(function ($refaction) {
-                $refaction->imgae = url('images/' . $refaction->image);
+                $refaction->image = url('images/' . $refaction->image);
                 return $refaction;
             });
 
