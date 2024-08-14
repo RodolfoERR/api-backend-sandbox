@@ -65,27 +65,38 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
         $request->validate([
             'email' => 'email|unique:users,email,' . $id,
-            'f_name' => 'required',
-            'l_name' => 'required',
-            'phone' => 'numeric',
-            'active' => 'boolean',
-            'password' => 'required',
-            'code' => 'nullable|size:6',
-            'role_id' => 'required|exists:roles,id',
-            'email_verified_at' => 'nullable|date',
+            'f_name' => 'required|string|max:255',
+            'l_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'active' => 'required|boolean',
+            'code' => 'nullable|string|max:255',
+            'fingerprint' => 'nullable|string|max:255',
+            'role_id' => 'required|integer|exists:roles,id',
+            // Aquí no se valida la contraseña como requerida
         ]);
-
-        $user = User::find($id);
-
-        if (!$user) {
-            return response()->json(['error' => 'User not found'], 404);
+    
+        $user->email = $request->email;
+        $user->f_name = $request->f_name;
+        $user->l_name = $request->l_name;
+        $user->phone = $request->phone;
+        $user->active = $request->active;
+        $user->code = $request->code;
+        $user->fingerprint = $request->fingerprint;
+        $user->role_id = $request->role_id;
+    
+        // Solo actualiza la contraseña si se proporciona
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
         }
-
-        $user->update($request->all());
+    
+        $user->save();
+    
         return response()->json($user, 200);
     }
+    
 
     public function destroy($id)
     {
