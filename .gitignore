@@ -183,3 +183,7 @@ database/seeders/DatabaseSeeder.php
 public
 
 database\seeders\DatabaseSeeder.php
+composer.json
+composer.lock
+package-lock.json
+package.json

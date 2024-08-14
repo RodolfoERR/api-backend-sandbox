@@ -13,6 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Ruta para el SSE en tu archivo de rutas (routes/web.php)
+// Route::get('/sse/reports', function () {
+//     return response()->stream(function () {
+//         while (true) {
+//             echo "data: " . json_encode(['message' => 'Esperando nuevas notificaciones...']) . "\n\n";
+//             ob_flush();
+//             flush();
+//             sleep(1);
+//         }
+//     }, 200, [
+//         'Content-Type' => 'text/event-stream',
+//         'Cache-Control' => 'no-cache',
+//         'Connection' => 'keep-alive',
+//     ]);
+// });
 
 Route::get('/', function () {
     return view('loginweb');
