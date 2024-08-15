@@ -42,7 +42,6 @@ class ShelvesController extends Controller
         ], [
             'name' => [
                 'required' => 'Necesitamos el nombre de la ubicacion',
-                'unique'   => 'No puede haber dos ubicaciones nombradas igual'
             ],
             'level_id' => [
                 'required' => 'Necesitamos el id del nivel almacenado',
@@ -78,7 +77,6 @@ class ShelvesController extends Controller
             'rack_id' => 'required|exists:racks,id'
         ], [
             'name.required' => 'Necesitamos el nombre de la ubicacion',
-            'name.unique' => 'No puede haber dos ubicaciones nombradas igual',
             'level_id.required' => 'Necesitamos el id del nivel almacenado',
             'level_id.exists' => 'Debe ser existente la id',
             'rack_id.required' => 'Necesitamos el id de la torre',
