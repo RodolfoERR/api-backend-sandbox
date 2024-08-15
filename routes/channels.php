@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+// Canal público (no requiere autenticación)
+Broadcast::channel('controldealmacen', function ($user) {
+    return true; // Permitir a todos los usuarios acceder
+});
