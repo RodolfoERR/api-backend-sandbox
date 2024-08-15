@@ -278,7 +278,7 @@
                     },
                     error: function(xhr, status, error) {
                         localStorage.removeItem('auth_token');
-                        window.location.href = '{{ url("/views/loginweb") }}';
+                        window.location.href = '{{ url("/views/login") }}';
                     }
                 });
             }
