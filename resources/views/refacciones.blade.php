@@ -409,9 +409,16 @@
         $('#refactionForm').on('submit', function(event) {
             event.preventDefault();
 
+            var totalQuantity = parseFloat($('#total_quantity').val());
+            var unitPrice = parseFloat($('#unit_price').val());
+
+            if (totalQuantity <= 0 || unitPrice <= 0) {
+                alert('La cantidad total y el precio unitario deben ser mayores que 0.');
+                return;
+            }
             var refactionId = $('#refactionId').val();
-            var url = refactionId? '{{ url("/api/v1/refactions/update") }}/' + refactionId : '{{ url("/api/v1/refactions/create") }}';
-            var method = refactionId? 'POST' : 'POST';
+            var url = refactionId ? '{{ url("/api/v1/refactions/update") }}/' + refactionId : '{{ url("/api/v1/refactions/create") }}';
+            var method = refactionId ? 'POST' : 'POST';
 
             var formData = new FormData(this);
             var fileInput = $('#image')[0];
@@ -424,7 +431,7 @@
             $.ajax({
                 url: url,
                 method: method,
-                data: formData, 
+                data: formData,
                 contentType: false,
                 processData: false,
                 success: function(response) {
@@ -433,12 +440,13 @@
                     console.log("El modo que se eligió fue: " + url);
                 },
                 error: function(xhr, status, error) {
-                    if (xhr.status!== 200) {
+                    if (xhr.status !== 200) {
                         alert('Error al guardar: ' + xhr.responseText);
                     }
                 }
             });
         });
+
 
         function deleteRefaction(id) {
             if (confirm('¿Estás seguro de que deseas eliminar esta refacción?')) {
