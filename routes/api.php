@@ -102,7 +102,7 @@ Route::prefix('v1')->group(function() {
         Route::get('by-user/{id}', [RegistersController::class, 'byIDUserReports'])->where('id', '[0-9]+');
     });
 
-    Route::prefix('fp')->middleware(['auth:sanctum', 'role:a'])->group(function() {
+    Route::prefix('fp')->middleware(['auth:sanctum'])->group(function() {
         Route::post('save-digital-fp', [FingerprintController::class, 'storeFingerprint']);
         Route::post('check-digital-fp', [FingerprintController::class, 'checkingFingerprint']);
     });
