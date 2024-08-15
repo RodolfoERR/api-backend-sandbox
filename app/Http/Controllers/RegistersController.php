@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Events\ReportCreated;
+use Illuminate\Support\Facades\Log;
 
 class RegistersController extends Controller
 {
@@ -107,13 +108,19 @@ class RegistersController extends Controller
                 $register_details->save();
 
                 $reportData[] = [
-                    'user' => $request->user()->name,
+                    'user' => $request->user()->f_name,
                     'refaction' => $refactionEdit->name,
                     'quantity' => $refaction["quantity"],
-                    'date' => now()
+                    'date' => $register_details->created_at
                 ];
             }
-            event(new ReportCreated($reportData));
+            try {
+                Log::info('Datos para el evento ReportCreated: ' . json_encode($reportData));
+                event(new ReportCreated($reportData));
+                Log::info('Evento ReportCreated disparado.');
+            } catch (Exception $e) {
+                Log::error('Error al disparar el evento ReportCreated: ' . $e->getMessage());
+            }
             return response()->json(["message"=>"success..."]);
         }catch(Exception $e){
             if($e)
