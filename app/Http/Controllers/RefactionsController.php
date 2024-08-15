@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Events\ReportCreated;
+use Illuminate\Support\Facades\Log;
 
 class RefactionsController extends Controller
 {
@@ -145,6 +146,7 @@ class RefactionsController extends Controller
     
 
     public function takingRefaction(Request $request, int $id){
+        Log::info('Iniciando el proceso de tomar refacción');
         $validator = Validator::make($request->all(), [
             'quantity' => 'numeric|min:1'
         ],[
@@ -165,14 +167,20 @@ class RefactionsController extends Controller
     
             $refaction->save();
 
-            $reportData[] = [
-                'user' => $request->user()->name,
+            $reportData = [
+                'user' => $request->user()->f_name,
                 'refaction' => $refaction->name,
                 'quantity' => $request->quantity,
-                'date' => now()
+                'date' => $refaction->updated_at
             ];
     
-            event(new ReportCreated($reportData));
+            try {
+                Log::info('Datos para el evento ReportCreated: ' . json_encode($reportData));
+                event(new ReportCreated($reportData));
+                Log::info('Evento ReportCreated disparado.');
+            } catch (Exception $e) {
+                Log::error('Error al disparar el evento ReportCreated: ' . $e->getMessage());
+            }
     
             return response()->json(['message'=>'accion establecida correctamente']);
         }catch(Exception $e){
