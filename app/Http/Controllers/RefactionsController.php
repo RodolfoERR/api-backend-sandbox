@@ -6,6 +6,7 @@ use App\Models\Refaction;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Events\ReportCreated;
 
 class RefactionsController extends Controller
 {
@@ -163,6 +164,15 @@ class RefactionsController extends Controller
             $refaction->total_quantity = $newTotal;
     
             $refaction->save();
+
+            $reportData[] = [
+                'user' => $request->user()->name,
+                'refaction' => $refaction->name,
+                'quantity' => $request->quantity,
+                'date' => now()
+            ];
+    
+            event(new ReportCreated($reportData));
     
             return response()->json(['message'=>'accion establecida correctamente']);
         }catch(Exception $e){
