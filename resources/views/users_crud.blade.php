@@ -205,7 +205,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <!--<th>ID</th>-->
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Teléfono</th>
@@ -338,7 +338,7 @@
                 data.forEach(user => {
                     let userRow = `
                         <tr>
-                            <td>${user.id}</td>
+                            <!--<td>${user.id}</td>-->
                             <td>${user.f_name}</td>
                             <td>${user.l_name}</td>
                             <td>${user.phone}</td>
@@ -387,12 +387,20 @@
                         $('#code').val(data.code);
                         $('#fingerprint').val(data.fingerprint);
                         $('#role_id').val(data.role_id);
+
+                        // Mostrar placeholder si es modo de edición
+                        $('#password').attr('placeholder', 'Dejar vacío para no cambiar la contraseña');
+                        $('#password_confirmation').attr('placeholder', 'Dejar vacío para no cambiar la contraseña');
                     },
                     error: function(xhr, status, error) {
                         var errorMsg = xhr.responseJSON.message || 'Error al cargar los datos del usuario.';
                         alert(errorMsg);
                     }
                 });
+            }else{
+                // Quitar el placeholder si es modo de agregar
+                $('#password').removeAttr('placeholder');
+                $('#password_confirmation').removeAttr('placeholder');
             }
 
             $('#userModal').modal('show');

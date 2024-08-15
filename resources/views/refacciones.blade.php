@@ -231,7 +231,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>ID</th>
+                <!--<th>ID</th>-->
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Cantidad Total</th>
@@ -351,7 +351,6 @@
             if (refaction.active === 1) { // Filtrar solo los registros con active = 1
                 let refactionRow = `
                 <tr>
-                    <td>${refaction.id}</td>
                     <td>${refaction.name}</td>
                     <td>${refaction.description}</td>
                     <td>${refaction.total_quantity}</td>

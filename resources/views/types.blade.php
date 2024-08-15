@@ -203,7 +203,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <!--<th>ID</th>-->
                     <th>Nombre</th>
                     <th>Acciones</th>
                 </tr>
@@ -284,7 +284,7 @@
                     if (response.data && response.data.length) {
                         response.data.forEach(function(type) {
                             var typeRow = `<tr>
-                                <td>${type.id}</td>
+                                
                                 <td>${type.name}</td>
                                 <td>
                                     <button class="btn btn-warning" onclick="openModal('edit', ${type.id}, '${type.name}')">Editar</button>
