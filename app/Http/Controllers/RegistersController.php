@@ -15,7 +15,7 @@ class RegistersController extends Controller
 {
     public function allReports(){
         try{
-            $reports = Register::with(['registerDetail'])->get();
+            $reports = Register::with(['registerDetail.refaction', 'userDetails'])->get();
             return response()->json(["message"=>"success", "Data"=>$reports]);
         }catch(Exception $e){
             if($e)

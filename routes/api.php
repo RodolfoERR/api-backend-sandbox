@@ -83,13 +83,17 @@ Route::prefix('v1')->group(function() {
         Route::get('by/{id}', [RefactionsController::class, 'readRefactionById'])->where('id', '[0-9]+');
 
         Route::middleware('role:a')->group(function(){
-            Route::get('all', [RefactionsController::class, 'readAllRefactions']);
             Route::post('create', [RefactionsController::class, 'createRefaction']);
             Route::post('update/{id}', [RefactionsController::class, 'editRefaction'])->where('id', '[0-9]+');
             Route::put('replenishment/{id}', [RefactionsController::class, 'replenishmentRefaction'])->where('id', '[0-9]+');
             Route::delete('delete/{id}', [RefactionsController::class, 'deleteRefaction'])->where('id', '[0-9]+');
         });
     });
+    
+    Route::prefix('refactions')->group(function(){
+        Route::get('all', [RefactionsController::class, 'readAllRefactions']);
+    });
+
     Route::prefix('reports')->middleware(['auth:sanctum'])->group(function() {
         Route::middleware('role:a')->group(function(){
             Route::get('all', [RegistersController::class, 'allReports']);
