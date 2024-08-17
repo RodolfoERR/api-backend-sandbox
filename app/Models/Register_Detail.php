@@ -16,7 +16,7 @@ class Register_Detail extends Model
         return $this->belongsTo(Register::class);
     }
 
-    public function refaction(): HasOne{
-        return $this->hasOne(Refaction::class);
+    public function refaction(): BelongsTo{
+        return $this->belongsTo(Refaction::class, 'refaction_id', 'id');
     }
 }
