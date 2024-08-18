@@ -215,6 +215,11 @@
                         <hr>
                     </a>
                 </li>
+                <li>
+                    <a class="nav-link active" href="reports">Movimientos
+                        <hr>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -227,6 +232,7 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Nivel</th>
+                    <th>Rack</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -331,8 +337,9 @@
                         <tr>
                             <td>${location.name}</td>
                             <td>${location.level.name}</td>
+                            <td>${location.rack.name}</td>
                             <td>
-                                <button class="btn btn-warning" onclick="openModal('edit', ${location.id})">Editar</button>
+                                <button class="btn btn-warning" onclick="openModal('edit', ${location.id}, '${location.name}', ${location.level.id}, ${location.rack_id})">Editar</button>
                                 <button class="btn btn-danger" onclick="deleteLocation(${location.id})">Eliminar</button>
                             </td>
                         </tr>
@@ -341,6 +348,7 @@
                 });
             });
         }
+
         function fetchRacks() {
             $.get('{{ url("/api/v1/racks/all") }}', function(data) {
                 let rackSelect = $('#rack_id');
@@ -352,33 +360,25 @@
             });
         }
 
-
-        function openModal(mode, id) {
+        function openModal(mode, id = null, name = '', level_id = '', rack_id = '') {
             $('#locationForm')[0].reset();
+            $('#locationId').val('');
+            $('#name').val('');
+            $('#level_id').val('');
+            $('#rack_id').val('');
 
-            if (mode === 'edit' && id) {
-                $.ajax({
-                    url: '/api/v1/locations/by/' + id,
-                    method: 'GET',
-                    success: function(response) {
-                        let location = response.data;
-                        $('#locationId').val(location.id);
-                        $('#name').val(location.name);
-                        $('#level_id').val(location.level.id); // Asegúrate de usar location.level.id si así se llama en la respuesta del servidor
-                        $('#rack_id').val(location.rack_id);
-                        console.log("El id es "+location.id);
-                    },
-                    error: function(xhr, status, error) {
-                        var errorMsg = xhr.responseJSON.message || 'Error al cargar los datos de la ubicación.';
-                        alert(errorMsg);
-                    }
-                });
+            if (mode === 'edit') {
+                $('#locationModalLabel').text('Editar Ubicación');
+                $('#locationId').val(id);
+                $('#name').val(name);
+                $('#level_id').val(level_id); 
+                $('#rack_id').val(rack_id);
+            } else {
+                $('#locationModalLabel').text('Agregar Ubicación');
             }
 
-            $('#locationModalLabel').text(mode === 'edit' ? 'Editar Ubicación' : 'Agregar Ubicación');
             $('#locationModal').modal('show');
         }
-
 
         $('#locationForm').on('submit', function(event) {
             event.preventDefault();
@@ -412,7 +412,7 @@
                         fetchRacks();
                     },
                     error: function(xhr) {
-                        alert('Error: ' + xhr.responseText);
+                        alert('Error al eliminar la ubicación: ' + xhr.responseText);
                     }
                 });
             }
