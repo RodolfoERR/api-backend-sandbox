@@ -194,6 +194,11 @@
                         <hr>
                     </a>
                 </li>
+                <li>
+                    <a class="nav-link active" href="reports">Movimientos
+                        <hr>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -250,7 +255,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">Teléfono</label>
-                            <input type="text" class="form-control" id="phone" name="phone" required>
+                            <input type="text" class="form-control" id="phone" name="phone" maxlength="10" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Contraseña</label>
@@ -327,7 +332,7 @@
                 });
 
                 fetchUsers();
-                loadRoles();
+                //loadRoles();
             }
         });
 

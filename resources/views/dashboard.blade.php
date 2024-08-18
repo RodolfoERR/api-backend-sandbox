@@ -140,32 +140,44 @@
     <nav class="col-md-2 d-none d-md-block sidebar">
         <div class="sidebar">
             <div class="profile-section">
-                <img src="https://www.movilzona.es/app/uploads-movilzona.es/2023/04/fto-perfil.jpg?x=480&y=375&quality=40" alt="Profile">
+                <img src="https://www.movilzona.es/app/uploads-movilzona.es/2023/04/fto-perfil.jpg?x=480&y=375&quality=40" alt="Profile"> <!-- Ajusta el path de la imagen de perfil -->
                 <h4>Admin</h4>
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="userscrud">Usuarios
+                    <a class="nav-link active" href="userscrud">
+                        <!--<i class="fas fa-user"></i>-->
+                        Usuarios
                         <hr>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="refacciones">Refacciones
+                <a class="nav-link active" href="refacciones">
+               
+                        Refacciones
                         <hr>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="types">Tipos
+                <a class="nav-link active" href="types">
+                        Tipos
                         <hr>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="locations">Ubicaciones
+                <a class="nav-link active" href="locations">
+                        Ubicaciones
                         <hr>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="racks">Racks
+                    <a class="nav-link active" href="racks">
+                        Racks
+                        <hr>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link active" href="reports">Movimientos
                         <hr>
                     </a>
                 </li>

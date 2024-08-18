@@ -154,7 +154,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="dashboard">
-            Control de Almacén
+            Control de almacén
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -188,31 +188,41 @@
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link active" href="userscrud">
+                        <!--<i class="fas fa-user"></i>-->
                         Usuarios
                         <hr>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="refacciones">
+                <a class="nav-link active" href="refacciones">
+               
                         Refacciones
                         <hr>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="types">
+                <a class="nav-link active" href="types">
+                        
                         Tipos
                         <hr>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="locations">
+                <a class="nav-link active" href="locations">
+                        
                         Ubicaciones
                         <hr>
                     </a>
                 </li>
                 <li>
                     <a class="nav-link active" href="racks">
+                        
                         Racks
+                        <hr>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link active" href="reports">Movimientos
                         <hr>
                     </a>
                 </li>
@@ -305,7 +315,7 @@
                             <tr>
                                 <td>${rack.name}</td>
                                 <td>
-                                    <button class="btn btn-warning" onclick="openModal('edit', ${rack.id})">Editar</button>
+                                    <button class="btn btn-warning" onclick="openModal('edit', ${rack.id}, '${rack.name}')">Editar</button>
                                     <button class="btn btn-danger" onclick="deleteRack(${rack.id})">Eliminar</button>
                                 </td>
                             </tr>
@@ -316,31 +326,22 @@
             });
         }
 
-
-        function openModal(mode, id) {
+        function openModal(mode, id = null, name='') {
             $('#rackForm')[0].reset();
+            $('#rackId').val('');
+            $('#name').val('');
 
-            if (mode === 'edit' && id) {
-                $.ajax({
-                    url: '/api/v1/racks/by/' + id,
-                    method: 'GET',
-                    success: function(response) {
-                        let rack = response.data;
-                        $('#rackId').val(rack.id);
-                        $('#name').val(rack.name);
-                    },
-                    error: function(xhr, status, error) {
-                        var errorMsg = xhr.responseJSON.message || 'Error al cargar los datos del rack.';
-                        alert(errorMsg);
-                    }
-                });
+            if (mode === 'edit') {
+                $('#rackModalLabel').text('Editar Rack');
+                $('#rackId').val(id);
+                $('#name').val(name);
+            } else {
+                $('#rackModalLabel').text('Agregar Rack');
             }
-
-            $('#rackModalLabel').text(mode === 'edit' ? 'Editar Rack' : 'Agregar Rack');
             $('#rackModal').modal('show');
         }
 
-        $('#rackForm').on('submit', function(event) {
+        $('#rackForm').submit(function(event) {
             event.preventDefault();
 
             var rackId = $('#rackId').val();
@@ -350,7 +351,9 @@
             $.ajax({
                 url: url,
                 method: method,
-                data: $(this).serialize(),
+                data:{
+                    name: $('#name').val()
+                },
                 success: function(response) {
                     $('#rackModal').modal('hide');
                     fetchRacks();
@@ -375,7 +378,6 @@
                 });
             }
         }
-
 
         $('#logoutButton').click(function() {
             localStorage.removeItem('auth_token');

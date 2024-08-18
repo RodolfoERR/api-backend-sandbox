@@ -18,8 +18,9 @@ class SendReportNotification
      */
     public function handle(ReportCreated $event)
     {
-        // Aquí no necesitas usar `broadcastAs` directamente
-        // Emitimos el evento y Laravel se encargará de todo
-        event(new ReportCreated($event->data));
+        Log::info('Sending event to Pusher', ['data' => $event->data]);
+
+        // Aquí puedes hacer cualquier otra cosa que necesites con los datos del evento,
+        // como enviar notificaciones adicionales, guardar registros, etc.
     }
 }

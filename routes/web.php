@@ -67,5 +67,7 @@ Route::prefix('views')->group(function(){
         return view('racks');
     })->name('racks');
 
-    /*Líneas temporales para borrar.*/
+    Route::get('reports', function () {
+        return view('reports');
+    })->name('reports');
 });
