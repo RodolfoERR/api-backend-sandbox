@@ -80,8 +80,7 @@ Route::prefix('v1')->group(function() {
         Route::get('all-minus', [HiddenController::class, 'readAllRefactionsMinus']);
         Route::put('taking/{id}', [RefactionsController::class, 'takingRefaction'])->where('id', '[0-9]+');
         Route::get('all-locations', [ShelvesController::class, 'getShelves']);
-        Route::get('by/{id}', [RefactionsController::class, 'readRefactionById'])->where('id', '[0-9]+');
-
+        
         Route::middleware('role:a')->group(function(){
             Route::post('create', [RefactionsController::class, 'createRefaction']);
             Route::post('update/{id}', [RefactionsController::class, 'editRefaction'])->where('id', '[0-9]+');
@@ -91,6 +90,7 @@ Route::prefix('v1')->group(function() {
     });
     
     Route::prefix('refactions')->group(function(){
+        Route::get('by/{id}', [RefactionsController::class, 'readRefactionById'])->where('id', '[0-9]+');
         Route::get('all', [RefactionsController::class, 'readAllRefactions']);
     });
 
