@@ -87,7 +87,7 @@
                         <div class="row g-0">
                             <div class="col-md-6 col-lg-5 d-none d-md-block">
                                 <!-- Imagen de lado izquierdo -->
-                                <img src="https://img.freepik.com/foto-gratis/mecanico-automoviles-revisando-aceite-motor-automovil-mientras-trabaja-taller-reparacion-automoviles_637285-4299.jpg" alt="login form" class="img-fluid card-img-left" />
+                                <img src="https://static.wixstatic.com/media/c8c8de_dd12fae56bbf49b391740de1cea6df9d~mv2.jpg/v1/fill/w_960,h_1280,al_c,q_85,enc_auto/c8c8de_dd12fae56bbf49b391740de1cea6df9d~mv2.jpg" alt="login form" class="img-fluid w-100" />
                             </div>
                             <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                 <div class="card-body p-4 p-lg-5 text-black">
