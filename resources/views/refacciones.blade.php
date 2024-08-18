@@ -155,7 +155,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="dashboard">
-            Control de Almacén
+            Control de almacén
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -195,19 +195,22 @@
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="refacciones">
+                <a class="nav-link active" href="refacciones">
+               
                         Refacciones
                         <hr>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="types">
+                <a class="nav-link active" href="types">
+                        
                         Tipos
                         <hr>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="locations">
+                <a class="nav-link active" href="locations">
+                        
                         Ubicaciones
                         <hr>
                     </a>
@@ -219,11 +222,14 @@
                         <hr>
                     </a>
                 </li>
+                <li>
+                    <a class="nav-link active" href="reports">Movimientos
+                        <hr>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
-
-    <!-- ... -->
 
 <div class="main-content">
     <h1>Refacciones</h1>
