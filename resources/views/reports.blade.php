@@ -206,6 +206,10 @@
             <div class="col-md-2 d-flex align-items-end">
                 <button id="filterButton" class="btn btn-primary btn-block">Filtrar</button>
             </div>
+            <div class="col-md-2">
+                <label for="clearFilterButton">&nbsp;</label>
+                <button id="clearFilterButton" class="btn btn-secondary btn-block">Limpiar Filtro</button>
+            </div>
         </div>
 
         <div class="row mb-4">
@@ -254,6 +258,7 @@
     <script>
         $(document).ready(function() {
             var authToken = localStorage.getItem('auth_token');
+            var autoFetchEnabled = true;
             console.log("El token es: " + authToken);
             if (!authToken) {
                 window.location.href = '{{ url("/views/login") }}';
@@ -282,12 +287,21 @@
                 });
 
                 fetchReports();
+                // Ejecutar fetchReports() cada 3 segundos si autoFetchEnabled es true
+                setInterval(function() {
+                    if (autoFetchEnabled) {
+                        fetchReports();
+                    }
+                }, 5000);
                 fetchUsers();
                 fetchRefactions();
 
                 $('#filterButton').click(function() {
+                    // Desactivar la ejecución automática mientras se usan los filtros
+                    autoFetchEnabled = false;
+
                     let searchUser = $('#searchUser').val();
-                    let searchRefaction = $('#searchRefaction').val(); // Nueva refacción
+                    let searchRefaction = $('#searchRefaction').val();
                     let startDate = $('#startDate').val();
                     let startTime = $('#startTime').val() || '00:00';
                     let endDate = $('#endDate').val();
@@ -303,6 +317,20 @@
                             console.error('Data no tiene el formato esperado o está vacío:', data);
                         }
                     });
+                });
+                $('#clearFilterButton').click(function() {
+                    // Restablecer los campos de filtro a sus valores predeterminados
+                    $('#searchUser').val('');
+                    $('#searchRefaction').val('');
+                    $('#startDate').val('');
+                    $('#startTime').val('');
+                    $('#endDate').val('');
+                    $('#endTime').val('');
+
+                    // Activar la ejecución automática
+                    autoFetchEnabled = true;
+                    // Volver a ejecutar fetchReports() para mostrar todos los registros
+                    fetchReports();
                 });
 
             }
