@@ -38,4 +38,6 @@ class FingerprintController extends Controller
             'data' => $user->fingerprint
         ], 200, [], JSON_UNESCAPED_SLASHES);
     }
+
+    
 }

@@ -27,9 +27,19 @@ class AccessController extends Controller
 
         if($user->role_id === 2 && $user->active == true){
             $token = $user->createToken('auth_token')->plainTextToken;
+            $id_user = $user->id;
+            $name_user = $user->f_name;
             $user->save();
 
-            return response()->json(['success' => true, 'message' => 'welcome', 'token' => $token], 200);
+            return response()->json([
+                'success' => true, 
+                'message' => 'welcome', 
+                'token' => $token,
+                'user' => [
+                    'id' => $id_user,
+                    'name' => $name_user
+                ]
+            ], 200);
         }
 
         if($user->role_id === 1 && $user->code !== null){
