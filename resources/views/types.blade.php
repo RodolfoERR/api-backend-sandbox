@@ -193,6 +193,11 @@
                         <hr>
                     </a>
                 </li>
+                <li>
+                    <a class="nav-link active" href="reports">Movimientos
+                        <hr>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
