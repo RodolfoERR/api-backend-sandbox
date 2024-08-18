@@ -25,7 +25,7 @@ class RegistersController extends Controller
 
     public function byIdReports(int $id){
         try{
-            $report = Register::with(['registerDetail'])->find($id);
+            $report = Register::with(['registerDetail.refaction', 'userDetails'])->find($id);
             return response()->json(["message"=>"success", "Data"=>$report]);
         }catch(Exception $e){
             if($e)
@@ -35,7 +35,7 @@ class RegistersController extends Controller
 
     public function byUserReports(Request $request){
         try{
-            $reports = Register::with(['registerDetail'])->where('user_id', $request->user()->id)->get();
+            $reports = Register::with(['registerDetail.refaction', 'userDetails'])->where('user_id', $request->user()->id)->get();
             return response()->json(["message"=>"success", "Data"=>$reports]);
         }catch(Exception $e){
             if($e)
